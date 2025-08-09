@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Click World - Admission Form</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: #333;
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 900px;
+      margin: 20px auto;
+      text-align: center;
+    }
+    
+    .logo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+      animation: fadeIn 1s ease-out;
+    }
+    
+    .logo {
+      width: 180px;
+      height: 180px;
+      background: linear-gradient(45deg, #2a85ff, #1a5fd0);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      border: 5px solid white;
+    }
+    
+    .logo i {
+      font-size: 80px;
+      color: white;
+    }
+    
+    .logo-text {
+      font-size: 36px;
+      font-weight: 800;
+      color: white;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      margin-bottom: 5px;
+      letter-spacing: 1px;
+    }
+    
+    .logo-subtext {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 500px;
+    }
+    
+    .contact-info {
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px 20px;
+      border-radius: 50px;
+      margin: 15px auto;
+      display: inline-block;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    }
+    
+    .contact-info i {
+      color: #2a85ff;
+      margin-right: 5px;
+    }
+    
+    .registration-btn {
+      background: linear-gradient(to right, #ff8c00, #ff4500);
+      color: white;
+      border: none;
+      padding: 18px 45px;
+      font-size: 20px;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      margin: 30px 0;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    
+    .registration-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(to right, #ff4500, #ff8c00);
+    }
+    
+    .registration-btn:active {
+      transform: translateY(2px);
+    }
+    
+    .form-container {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.35);
+      max-width: 850px;
+      margin: 20px auto;
+      display: none;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.5s ease;
+    }
+    
+    .form-container.show {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+      animation: formAppear 0.8s ease-out;
+    }
+    
+    @keyframes formAppear {
+      0% { opacity: 0; transform: translateY(30px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    
+    .form-header {
+      background: linear-gradient(to right, #2a85ff, #1a5fd0);
+      color: white;
+      padding: 25px 20px;
+      text-align: center;
+    }
+    
+    .form-header h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+    
+    .form-content {
+      padding: 30px;
+    }
+    
+    form {
+      text-align: left;
+    }
+    
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 600;
+      color: #1a5fd0;
+      font-size: 16px;
+    }
+    
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 15px;
+      margin-top: 8px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border 0.3s;
+    }
+    
+    input:focus, select:focus, textarea:focus {
+      border-color: #2a85ff;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(42, 133, 255, 0.2);
+    }
+    
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 10px;
+    }
+    
+    .checkbox-group label {
+      display: flex;
+      align-items: center;
+      font-weight: normal;
+      margin-top: 0;
+      background: #f0f7ff;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    .checkbox-group label:hover {
+      background: #e1f0ff;
+    }
+    
+    .checkbox-group input {
+      width: auto;
+      margin-right: 8px;
+      margin-top: 0;
+    }
+    
+    .section {
+      margin-top: 25px;
+      padding: 20px;
+      border: 1px solid #e1e8f0;
+      border-radius: 12px;
+      background: #f9fbfd;
+    }
+    
+    .section h3 {
+      color: #1a5fd0;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e1e8f0;
+    }
+    
+    button[type="submit"] {
+      background: linear-gradient(to right, #00c853, #009624);
+      color: white;
+      border: none;
+      padding: 15px 35px;
+      font-size: 18px;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 30px;
+      width: 100%;
+      transition: all 0.3s;
+      box-shadow: 0 5px 15px rgba(0, 200, 83, 0.3);
+    }
+    
+    button[type="submit"]:hover {
+      background: linear-gradient(to right, #009624, #00c853);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 200, 83, 0.4);
+    }
+    
+    .footer {
+      background: #1a293b;
+      color: #a0b1c5;
+      padding: 25px;
+      text-align: center;
+      font-size: 14px;
+      margin-top: 30px;
+      border-radius: 0 0 15px 15px;
+    }
+    
+    .footer p {
+      margin: 8px 0;
+    }
+    
+    .footer-title {
+      color: white;
+      font-weight: 600;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    
+    @media (max-width: 768px) {
+      .container {
+        padding: 10px;
+      }
+      
+      .logo {
+        width: 140px;
+        height: 140px;
+      }
+      
+      .logo i {
+        font-size: 60px;
+      }
+      
+      .logo-text {
+        font-size: 28px;
+      }
+      
+      .logo-subtext {
+        font-size: 16px;
+      }
+      
+      .form-content {
+        padding: 20px;
+      }
+      
+      .section {
+        padding: 15px;
+      }
+      
+      .registration-btn {
+        padding: 15px 35px;
+        font-size: 18px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .contact-info {
+        padding: 8px 15px;
+        font-size: 14px;
+      }
+      
+      .checkbox-group {
+        flex-direction: column;
+        gap: 8px;
+      }
+      
+      .logo-text {
+        font-size: 24px;
+      }
+      
+      .form-header h2 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo-container">
+      <div class="logo">
+        <i class="fas fa-laptop-code"></i>
+      </div>
+      <div class="logo-text">CLICK WORLD</div>
+      <div class="logo-subtext">Computer Education Center - Empowering Digital Futures</div>
+    </div>
+    
+    <div class="contact-info">
+      <i class="fas fa-map-marker-alt"></i> Saptibari, Maynaguri, Jalpaiguri – 735224 &nbsp;&nbsp;&nbsp;
+      <i class="fas fa-phone"></i> 9474827290 / 9832458842
+    </div>
+    
+    <button class="registration-btn" id="showFormBtn">
+      <i class="fas fa-pencil-alt"></i> রেজিস্ট্রেশন করুন এখানে ক্লিক করুন
+    </button>
+    
+    <div class="form-container" id="admissionForm">
+      <div class="form-header">
+        <h2>Click World - Admission Form</h2>
+        <p>Fill out the form to enroll in our computer courses</p>
+      </div>
+      
+      <div class="form-content">
+        <form id="admissionFormContent">
+          <div class="section">
+            <h3>Student Information</h3>
+
+            <label>1. Full Name of Student:</label>
+            <input type="text" name="student_name" required placeholder="Enter student's full name">
+
+            <label>2. Date of Birth (DD/MM/YYYY):</label>
+            <input type="date" name="dob">
+
+            <label>3. Age:</label>
+            <input type="number" name="age" placeholder="Enter age">
+
+            <label>4. Gender:</label>
+            <div class="checkbox-group">
+              <label><input type="radio" name="gender" value="Male"> Male</label>
+              <label><input type="radio" name="gender" value="Female"> Female</label>
+              <label><input type="radio" name="gender" value="Other"> Other</label>
+            </div>
+
+            <label>5. Cast:</label>
+            <input type="text" name="cast" placeholder="Enter cast">
+
+            <label>6. School Name:</label>
+            <input type="text" name="school_name" placeholder="Enter school name">
+
+            <label>7. Class:</label>
+            <input type="text" name="class" placeholder="Enter class/grade">
+          </div>
+
+          <div class="section">
+            <h3>Parent/Guardian Details</h3>
+
+            <label>8. Father’s Name:</label>
+            <input type="text" name="father_name" placeholder="Enter father's name">
+
+            <label>9. Mother’s Name:</label>
+            <input type="text" name="mother_name" placeholder="Enter mother's name">
+
+            <label>10. Phone Number (Primary):</label>
+            <input type="tel" name="phone_primary" placeholder="Enter primary phone number">
+
+            <label>11. Alternate Number (if any):</label>
+            <input type="tel" name="phone_alt" placeholder="Enter alternate phone number">
+
+            <label>12. Address:</label>
+            <textarea name="address" rows="3" placeholder="Enter complete address"></textarea>
+          </div>
+
+          <div class="section">
+            <h3>Computer Knowledge (If Any)</h3>
+            <label>13. Skill Level:</label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="skills" value="Beginner"> Beginner</label>
+              <label><input type="checkbox" name="skills" value="Mouse"> Can Use Mouse</label>
+              <label><input type="checkbox" name="skills" value="Typing"> Can Type</label>
+              <label><input type="checkbox" name="skills" value="Drawing"> Knows Basic Drawing</label>
+            </div>
+
+            <label>14. Has your child ever attended any computer class before?</label>
+            <div class="checkbox-group">
+              <label><input type="radio" name="prior_class" value="Yes"> Yes</label>
+              <label><input type="radio" name="prior_class" value="No"> No</label>
+            </div>
+
+            <label>If Yes, Where:</label>
+            <input type="text" name="previous_center" placeholder="Enter previous center name">
+          </div>
+
+          <div class="section">
+            <h3>Batch Preference</h3>
+            <div class="checkbox-group">
+              <label><input type="radio" name="batch" value="Morning"> Morning Batch (10:00 – 11:30)</label>
+              <label><input type="radio" name="batch" value="Mid-day"> Mid-day Batch (11:45 – 01:15)</label>
+              <label><input type="radio" name="batch" value="Afternoon"> Afternoon Batch (3:00 – 4:30)</label>
+            </div>
+          </div>
+
+          <div class="section">
+            <h3>Upload Student Photo</h3>
+            <input type="file" name="photo" accept="image/*">
+          </div>
+
+          <div class="section">
+            <h3>Declaration by Parent/Guardian</h3>
+            <p style="margin-bottom: 15px; line-height: 1.6; background: #f0f7ff; padding: 15px; border-radius: 8px;">
+              I hereby declare that all the information provided above is true to the best of my knowledge. I agree to follow the rules and regulations of Click World Computer Centre.
+            </p>
+
+            <label>Date:</label>
+            <input type="date" name="declaration_date">
+
+            <label>Signature of Parent/Guardian (Type Name):</label>
+            <input type="text" name="guardian_signature" placeholder="Enter your full name">
+          </div>
+
+          <button type="submit">Submit Admission Form</button>
+        </form>
+      </div>
+      
+      <div class="footer">
+        <div class="footer-title">For Office Use Only</div>
+        <p>Admission No.: ____</p>
+        <p>Date of Joining: ____</p>
+        <p>Course/Level Assigned: ____</p>
+        <p>Remarks: ____</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const showFormBtn = document.getElementById('showFormBtn');
+      const admissionForm = document.getElementById('admissionForm');
+      const formContent = document.getElementById('admissionFormContent');
+      
+      // Show form when registration button is clicked
+      showFormBtn.addEventListener('click', function() {
+        admissionForm.classList.add('show');
+        showFormBtn.style.display = 'none';
+      });
+      
+      // Form submission handling
+      formContent.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Form validation would go here
+        
+        // Show success message
+        alert('Admission form submitted successfully! We will contact you shortly.');
+        
+        // Reset form and hide it
+        formContent.reset();
+        admissionForm.classList.remove('show');
+        showFormBtn.style.display = 'inline-flex';
+      });
+    });
+  </script>
+</body>
+</html>
