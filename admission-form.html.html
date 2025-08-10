@@ -1,6 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+   <script>
+        // Google Drive API কনফিগারেশন
+        const CLIENT_ID = 'YOUR_CLIENT_ID.apps.googleusercontent.com';
+        const API_KEY = 'YOUR_API_KEY';
+        const FOLDER_ID = '14lUd9Li2uKKIgo3fHp50wFxYirsMurKU';
+        
+        let gapiInited = false;
+        let gisInited = false;
+
+        function gapiLoaded() {
+            gapi.load('client', initializeGapiClient);
+        }
+
+        async function initializeGapiClient() {
+            await gapi.client.init({
+                apiKey: API_KEY,
+                discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
+            });
+            gapiInited = true;
+        }
+
+        function gisLoaded() {
+            tokenClient = google.accounts.oauth2.initTokenClient({
+                client_id: CLIENT_ID,
+                scope: 'https://www.googleapis.com/auth/drive.file',
+                callback: '', // পরে সেট করা হবে
+            });
+            gisInited = true;
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            // ফর্ম ডেটা সংগ্রহ
+            const formData = new FormData(document.getElementById('admissionFormContent'));
+            const formObject = {};
+            formData.forEach((value, key) => formObject[key] = value);
+            
+            // ফাইল আপলোড হ্যান্ডলিং
+            const fileInput = document.querySelector('input[type="file"]');
+            if (fileInput.files.length > 0) {
+                uploadFile(fileInput.files[0], formObject);
+            } else {
+                saveToDrive(formObject);
+            }
+        }
+
+        async function uploadFile(file, formData) {
+            if (!gapiInited || !gisInited) {
+                alert('Google API লোড হচ্ছে... দয়া করে আবার চেষ্টা করুন');
+                return;
+            }
+
+            tokenClient.callback = async (resp) => {
+                if (resp.error !== undefined) {
+                    throw resp;
+                }
+                
+                const metadata = {
+                    name: `Admission_${formData.student_name}_${Date.now()}.json`,
+                    mimeType: 'application/json',
+                    parents: [FOLDER_ID]
+                };
+
+                const fileContent = JSON.stringify(formData, null, 2);
+                const blob = new Blob([fileContent], {type: 'application/json'});
+
+                try {
+                    await gapi.client.drive.files.create({
+                        resource: metadata,
+                        media: {
+                            mimeType: 'application/json',
+                            body: blob
+                        },
+                        fields: 'id'
+                    });
+                    
+                    alert('আপনার ফর্ম সফলভাবে জমা হয়েছে! আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।');
+                    window.close();
+                } catch (err) {
+                    console.error('Error uploading file:', err);
+                    alert('ফর্ম জমা দেওয়ার সময় একটি ত্রুটি ঘটেছে। দয়া করে পরে আবার চেষ্টা করুন।');
+                }
+            };
+
+            if (gapi.client.getToken() === null) {
+                tokenClient.requestAccessToken({prompt: ''});
+            } else {
+                tokenClient.requestAccessToken({prompt: ''});
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // পূর্বের ইভেন্ট লিসেনারগুলি অপরিবর্তিত
+            document.getElementById('admissionFormContent').addEventListener('submit', handleFormSubmit);
+        });
+    </script>
+</head>
+<body>
+    <!-- পূর্বের ফর্ম কন্টেন্ট অপরিবর্তিত -->
+</body>
+</html>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Click World - Admission Form</title>
