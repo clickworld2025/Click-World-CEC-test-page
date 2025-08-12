@@ -18,20 +18,106 @@
     </script>
 </head>
 <body>
-       <!-- Button to open Student Fee Register in a new tab -->
-<a href="student-fee-register.html" target="_blank" style="
-    display:inline-block;
-    background-color:#2563eb;
-    color:#fff;
-    padding:10px 20px;
-    border-radius:6px;
-    font-size:16px;
-    text-decoration:none;
-    font-weight:bold;
-    box-shadow:0 4px 8px rgba(0,0,0,0.2);
-">
-    📄 Open Student Fee Register
-</a>
+       <!DOCTYPE html>
+<html lang="bn">
+<head>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        function loadGAPI() {
+            gapi.load('client:auth2', initClient);
+        }
+
+        function initClient() {
+            gapi.client.init({
+                apiKey: 'YOUR_API_KEY',
+                clientId: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
+                discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
+                scope: 'https://www.googleapis.com/auth/drive.file'
+            });
+        }
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ক্লিক ওয়ার্ল্ড কম্পিউটার এডুকেশন সেন্টার</title>
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* আপনার সমস্ত CSS স্টাইল এখানে রাখুন */
+        /* ... পূর্বের সমস্ত CSS কোড ... */
+        
+        /* নতুন স্টাইল যোগ করুন */
+        .fee-register-btn {
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            z-index: 999;
+            display:inline-block;
+            background-color:#2563eb;
+            color:#fff;
+            padding:10px 20px;
+            border-radius:6px;
+            font-size:16px;
+            text-decoration:none;
+            font-weight:bold;
+            box-shadow:0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .fee-register-btn:hover {
+            background-color:#1d4ed8;
+            transform: translateY(-2px);
+            box-shadow:0 6px 12px rgba(0,0,0,0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .fee-register-btn {
+                top: 100px;
+                right: 10px;
+                padding: 8px 15px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">
+                    <img src="clickworld-logo.png" alt="Click World Logo" style="height: 50px; margin-right: 10px;">
+                    <div class="logo-text">ডিজিটাল <span>লার্নিং</span></div>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#home">হোম</a></li>
+                    <li><a href="#courses">কোর্সসমূহ</a></li>
+                    <li><a href="#features">সুবিধা</a></li>
+                    <li><a href="#about">আমাদের সম্পর্কে</a></li>
+                    <li><a href="#contact">যোগাযোগ</a></li>
+                </ul>
+                <a href="#enroll" class="btn">রেজিস্ট্রেশন করুন</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Student Fee Register Button -->
+    <a href="student-fee-register.html" target="_blank" class="fee-register-btn">
+        📄 Open Student Fee Register
+    </a>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <!-- ... বাকি সমস্ত HTML কন্টেন্ট ... -->
+    </section>
+
+    <!-- ... বাকি সমস্ত HTML সেকশন ... -->
+
+    <script>
+        // আপনার সমস্ত JavaScript কোড এখানে রাখুন
+        // ... পূর্বের সমস্ত JavaScript কোড ...
+    </script>
+</body>
+</html>
     <header>
         <div class="container">
             <nav class="navbar">
