@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,13 +32,102 @@
         body {
             background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
             color: var(--text);
-            padding: 20px;
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
         }
         
         .container {
             max-width: 1400px;
+            width: 100%;
             margin: 0 auto;
+        }
+        
+        /* Login Styles */
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+            text-align: center;
+            margin: 0 auto;
+        }
+        
+        .login-container h1 {
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 2rem;
+        }
+        
+        .login-container p {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        
+        .input-group input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: #fff;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+            margin-top: 15px;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.4);
+        }
+        
+        .error-message {
+            color: var(--danger);
+            margin-top: 15px;
+            display: none;
+        }
+        
+        /* App Container */
+        #appContainer {
+            display: none;
+            width: 100%;
         }
         
         /* Header Styles */
@@ -79,6 +168,38 @@
         .lead {
             color: var(--text-secondary);
             font-size: 1rem;
+        }
+        
+        .admin-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .admin-info {
+            text-align: right;
+        }
+        
+        .admin-name {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .logout-btn {
+            background: transparent;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.1);
         }
         
         /* Dashboard Cards */
@@ -166,7 +287,7 @@
             flex-wrap: wrap;
         }
         
-        .btn {
+        .btn-app {
             background: var(--primary);
             color: #fff;
             padding: 10px 20px;
@@ -181,19 +302,29 @@
             transition: all 0.3s ease;
         }
         
-        .btn:hover {
+        .btn-app:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
         }
         
-        .btn.alt {
+        .btn-app.alt {
             background: transparent;
             border: 2px solid var(--primary);
             color: var(--primary);
         }
         
-        .btn.alt:hover {
+        .btn-app.alt:hover {
             background: rgba(37, 99, 235, 0.1);
+        }
+        
+        .btn-app.danger {
+            background: transparent;
+            border: 2px solid var(--danger);
+            color: var(--danger);
+        }
+        
+        .btn-app.danger:hover {
+            background: rgba(239, 68, 68, 0.1);
         }
         
         .summary {
@@ -354,6 +485,11 @@
             margin-top: 15px;
         }
         
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+        
         /* Footer */
         .footer {
             margin-top: 30px;
@@ -400,199 +536,378 @@
                 flex-direction: column;
                 gap: 10px;
             }
+            
+            .login-container {
+                padding: 25px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 20px;
+            }
+            
+            header {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .admin-section {
+                margin-top: 10px;
+            }
+            
+            .admin-info {
+                text-align: center;
+            }
+        }
+        
+        /* Confirmation Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+        
+        .modal h3 {
+            color: var(--danger);
+            margin-bottom: 15px;
+        }
+        
+        .modal p {
+            margin-bottom: 20px;
+            color: var(--text);
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+        
+        .modal-btn {
+            padding: 10px 25px;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .modal-btn.cancel {
+            background: #e2e8f0;
+            color: var(--text);
+        }
+        
+        .modal-btn.delete {
+            background: var(--danger);
+            color: white;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header>
-            <div class="logo">CW</div>
-            <div class="header-text">
-                <h1>Click World Computer Education Center</h1>
-                <p class="lead">সপ্তীবাড়ী, ময়নাগুড়ি, জলপাইগুড়ি • যোগাযোগ: ৯৪৭৪৮২৭২৯০</p>
-            </div>
-        </header>
-        
-        <div class="dashboard">
-            <div class="card">
-                <h2><i class="fas fa-users"></i> ছাত্রছাত্রীদের ওভারভিউ</h2>
-                <div class="stat" id="totalStudents">0</div>
-                <p class="stat-desc">মোট নিবন্ধিত ছাত্রছাত্রী</p>
+        <!-- Login Container -->
+        <div class="login-container" id="loginSection">
+            <h1>Click World</h1>
+            <p>Student Fee Management System</p>
+            
+            <div class="input-group">
+                <label for="username">Admin Username</label>
+                <input type="text" id="username" placeholder="Enter your username">
             </div>
             
-            <div class="card">
-                <h2><i class="fas fa-rupee-sign"></i> আর্থিক সংক্ষিপ্ত</h2>
-                <div class="stat" id="totalPaid">₹0</div>
-                <p class="stat-desc">মোট আদায়কৃত ফি</p>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password">
             </div>
             
-            <div class="card">
-                <h2><i class="fas fa-exclamation-circle"></i> বকেয়া ফি</h2>
-                <div class="stat" id="totalDue">₹0</div>
-                <p class="stat-desc">মোট বকেয়া ফি</p>
-            </div>
+            <button class="btn" id="loginBtn">
+                <i class="fas fa-lock"></i> Login to System
+            </button>
             
-            <div class="card">
-                <h2><i class="fas fa-calendar-check"></i> চলতি মাস</h2>
-                <div class="stat" id="currentMonth">₹0</div>
-                <p class="stat-desc">জুলাই মাসে আদায়কৃত ফি</p>
+            <div class="error-message" id="errorMessage">
+                <i class="fas fa-exclamation-circle"></i> Invalid username or password!
             </div>
         </div>
         
-        <div class="controls">
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="ছাত্রছাত্রীর নাম, ভর্তি নম্বর, বা অবস্থা অনুসারে খুঁজুন...">
+        <!-- App Container (shown after login) -->
+        <div id="appContainer">
+            <header>
+                <div class="logo">CW</div>
+                <div class="header-text">
+                    <h1>Click World Computer Education Center</h1>
+                    <p class="lead">Saptibari, Maynaguri, Jalpaiguri • Contact: 9474827290</p>
+                </div>
+                <div class="admin-section">
+                    <div class="admin-info">
+                        <div class="admin-name">Admin User</div>
+                        <button class="logout-btn" id="logoutBtn">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </button>
+                    </div>
+                </div>
+            </header>
+            
+            <div class="dashboard">
+                <div class="card">
+                    <h2><i class="fas fa-users"></i> Student Overview</h2>
+                    <div class="stat" id="totalStudents">0</div>
+                    <p class="stat-desc">Total Registered Students</p>
+                </div>
+                
+                <div class="card">
+                    <h2><i class="fas fa-rupee-sign"></i> Financial Summary</h2>
+                    <div class="stat" id="totalPaid">₹0</div>
+                    <p class="stat-desc">Total Fees Collected</p>
+                </div>
+                
+                <div class="card">
+                    <h2><i class="fas fa-exclamation-circle"></i> Pending Fees</h2>
+                    <div class="stat" id="totalDue">₹0</div>
+                    <p class="stat-desc">Total Outstanding Fees</p>
+                </div>
+                
+                <div class="card">
+                    <h2><i class="fas fa-calendar-check"></i> Current Month</h2>
+                    <div class="stat" id="currentMonth">₹0</div>
+                    <p class="stat-desc">Fees Collected in July</p>
+                </div>
             </div>
             
-            <div class="summary">
-                <div class="badge" id="paidBadge">
-                    <i class="fas fa-check-circle"></i> পেইড: 15
+            <div class="controls">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search by student name, admission number, or status...">
                 </div>
-                <div class="badge" id="unpaidBadge">
-                    <i class="fas fa-exclamation-triangle"></i> আনপেইড: 8
-                </div>
-                <div class="badge" id="partialBadge">
-                    <i class="fas fa-adjust"></i> আংশিক: 0
-                </div>
-            </div>
-            
-            <div class="view-controls">
-                <button class="btn" id="openAdd">
-                    <i class="fas fa-user-plus"></i> নতুন ছাত্র যোগ করুন
-                </button>
-                <button class="btn alt" id="exportCSV">
-                    <i class="fas fa-download"></i> CSV এক্সপোর্ট
-                </button>
-            </div>
-        </div>
-        
-        <!-- Form Panel -->
-        <div class="panel" id="formPanel">
-            <h3 id="formTitle">নতুন ছাত্র যোগ করুন</h3>
-            <form id="studentForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>ছাত্রছাত্রীর নাম</label>
-                        <input type="text" id="inpName" required>
+                
+                <div class="summary">
+                    <div class="badge" id="paidBadge">
+                        <i class="fas fa-check-circle"></i> Paid: 0
                     </div>
-                    <div class="form-group">
-                        <label>পিতার নাম</label>
-                        <input type="text" id="inpFather">
+                    <div class="badge" id="unpaidBadge">
+                        <i class="fas fa-exclamation-triangle"></i> Unpaid: 0
                     </div>
-                    <div class="form-group">
-                        <label>মোবাইল নম্বর</label>
-                        <input type="text" id="inpMobile" placeholder="০১XXXXXXXXX">
+                    <div class="badge" id="partialBadge">
+                        <i class="fas fa-adjust"></i> Partial: 0
                     </div>
                 </div>
                 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>ভর্তি নম্বর</label>
-                        <input type="text" id="inpAdmission">
-                    </div>
-                    <div class="form-group">
-                        <label>কোর্সের নাম</label>
-                        <select id="inpCourse">
-                            <option>বেসিক কম্পিউটার</option>
-                            <option>ডিটিপি</option>
-                            <option>প্রোগ্রামিং</option>
-                            <option>গ্রাফিক ডিজাইন</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>মাসিক ফি (₹)</label>
-                        <input type="number" id="inpFee" value="300" min="0">
-                    </div>
-                </div>
-                
-                <div class="form-actions">
-                    <button type="submit" class="btn">
-                        <i class="fas fa-save"></i> সংরক্ষণ করুন
+                <div class="view-controls">
+                    <button class="btn-app" id="openAdd">
+                        <i class="fas fa-user-plus"></i> Add New Student
                     </button>
-                    <button type="button" class="btn alt" id="cancelBtn">
-                        <i class="fas fa-times"></i> বাতিল করুন
+                    <button class="btn-app alt" id="exportCSV">
+                        <i class="fas fa-download"></i> Export CSV
                     </button>
                 </div>
-            </form>
+            </div>
+            
+            <!-- Form Panel -->
+            <div class="panel" id="formPanel">
+                <h3 id="formTitle">Add New Student</h3>
+                <form id="studentForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Student Name</label>
+                            <input type="text" id="inpName" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Father's Name</label>
+                            <input type="text" id="inpFather">
+                        </div>
+                        <div class="form-group">
+                            <label>Mobile Number</label>
+                            <input type="text" id="inpMobile" placeholder="01XXXXXXXXX">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Admission Number</label>
+                            <input type="text" id="inpAdmission">
+                        </div>
+                        <div class="form-group">
+                            <label>Course Name</label>
+                            <select id="inpCourse">
+                                <option>Basic Computer</option>
+                                <option>DTP</option>
+                                <option>Programming</option>
+                                <option>Graphic Design</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Monthly Fee (₹)</label>
+                            <input type="number" id="inpFee" value="300" min="0">
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn-app">
+                            <i class="fas fa-save"></i> Save
+                        </button>
+                        <button type="button" class="btn-app alt" id="cancelBtn">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="table-container">
+                <table id="feeRegister">
+                    <thead>
+                        <tr>
+                            <th>SL No</th>
+                            <th>Admission No</th>
+                            <th>Student Name</th>
+                            <th>Father's Name</th>
+                            <th>DOB</th>
+                            <th>Mobile</th>
+                            <th>Course</th>
+                            <th>Admission Date</th>
+                            <th>Jan</th>
+                            <th>Feb</th>
+                            <th>Mar</th>
+                            <th>Apr</th>
+                            <th>May</th>
+                            <th>Jun</th>
+                            <th>Jul</th>
+                            <th>Aug</th>
+                            <th>Sep</th>
+                            <th>Oct</th>
+                            <th>Nov</th>
+                            <th>Dec</th>
+                            <th>Total Paid</th>
+                            <th>Due</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        <!-- Data will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="footer">
+                <p>© 2025 Click World Computer Education Center | Last Updated: 12 August, 2025</p>
+            </div>
         </div>
-        
-        <div class="table-container">
-            <table id="feeRegister">
-                <thead>
-                    <tr>
-                        <th>ক্রমিক নং</th>
-                        <th>ভর্তি নম্বর</th>
-                        <th>ছাত্রছাত্রীর নাম</th>
-                        <th>পিতার নাম</th>
-                        <th>জন্ম তারিখ</th>
-                        <th>মোবাইল নম্বর</th>
-                        <th>কোর্সের নাম</th>
-                        <th>ভর্তির তারিখ</th>
-                        <th>জানু</th>
-                        <th>ফেব্রু</th>
-                        <th>মার্চ</th>
-                        <th>এপ্রিল</th>
-                        <th>মে</th>
-                        <th>জুন</th>
-                        <th>জুলাই</th>
-                        <th>আগস্ট</th>
-                        <th>সেপ্ট</th>
-                        <th>অক্টো</th>
-                        <th>নভেম</th>
-                        <th>ডিসেম</th>
-                        <th>মোট প্রদত্ত</th>
-                        <th>বকেয়া</th>
-                        <th>অবস্থা</th>
-                        <th>ক্রিয়া</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody">
-                    <!-- Data will be populated here -->
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="footer">
-            <p>© ২০২৫ ক্লিক ওয়ার্ল্ড কম্পিউটার এডুকেশন সেন্টার | সর্বশেষ হালনাগাদ: ১২ আগস্ট, ২০২৫</p>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <h3><i class="fas fa-exclamation-triangle"></i> Confirm Deletion</h3>
+            <p>Are you sure you want to delete this student record? This action cannot be undone.</p>
+            <div class="modal-buttons">
+                <button class="modal-btn cancel" id="cancelDelete">Cancel</button>
+                <button class="modal-btn delete" id="confirmDelete">Delete</button>
+            </div>
         </div>
     </div>
 
     <script>
+        // Admin credentials
+        const ADMIN_USERNAME = "admin";
+        const ADMIN_PASSWORD = "clickworld@2025";
+        
         // Sample student data
-        const students = [
-            { id: 1, admissionNo: "CW-2025-S001", name: "জয় অধিকারী", father: "জনক অধিকারী", dob: "13/05/2012", mobile: "6294475931", course: "বেসিক কম্পিউটার", admissionDate: "07/04/2025", fee: 300, 
+        let students = [
+            { id: 1, admissionNo: "CW-2025-S001", name: "Joy Adhikari", father: "Jonak Adhikari", dob: "13/05/2012", mobile: "6294475931", course: "Basic Computer", admissionDate: "07/04/2025", fee: 300, 
               months: {jan: 'unpaid', feb: 'unpaid', mar: 'unpaid', apr: 'unpaid', may: 'unpaid', jun: 'unpaid', jul: 'paid', aug: 'unpaid', sep: 'unpaid', oct: 'unpaid', nov: 'unpaid', dec: 'unpaid'} },
-            { id: 2, admissionNo: "CW-2025-S002", name: "মহাদেব মন্ডল", father: "গৌরাঙ্গ মন্ডল", dob: "12/09/2015", mobile: "8972410203", course: "ডিটিপি", admissionDate: "07/04/2025", fee: 300, 
+            { id: 2, admissionNo: "CW-2025-S002", name: "Mahadev Mondal", father: "Gouranga Mondal", dob: "12/09/2015", mobile: "8972410203", course: "DTP", admissionDate: "07/04/2025", fee: 300, 
               months: {jan: 'unpaid', feb: 'unpaid', mar: 'unpaid', apr: 'unpaid', may: 'unpaid', jun: 'unpaid', jul: 'paid', aug: 'unpaid', sep: 'unpaid', oct: 'unpaid', nov: 'unpaid', dec: 'unpaid'} },
-            { id: 3, admissionNo: "CW-2025-S003", name: "তমালিকা রায়", father: "কৌরব রায়", dob: "04/07/2015", mobile: "9733396424", course: "গ্রাফিক ডিজাইন", admissionDate: "07/05/2025", fee: 300, 
+            { id: 3, admissionNo: "CW-2025-S003", name: "Tamalika Roy", father: "Kourob Roy", dob: "04/07/2015", mobile: "9733396424", course: "Graphic Design", admissionDate: "07/05/2025", fee: 300, 
               months: {jan: 'unpaid', feb: 'unpaid', mar: 'unpaid', apr: 'unpaid', may: 'unpaid', jun: 'unpaid', jul: 'paid', aug: 'unpaid', sep: 'unpaid', oct: 'unpaid', nov: 'unpaid', dec: 'unpaid'} },
-            { id: 4, admissionNo: "CW-2025-S004", name: "বুবাই রায়", father: "বিনয় কুমার রায়", dob: "23/01/2013", mobile: "7001486569", course: "প্রোগ্রামিং", admissionDate: "07/04/2025", fee: 300, 
+            { id: 4, admissionNo: "CW-2025-S004", name: "Bubai Roy", father: "Binoy Kumar Roy", dob: "23/01/2013", mobile: "7001486569", course: "Programming", admissionDate: "07/04/2025", fee: 300, 
               months: {jan: 'unpaid', feb: 'unpaid', mar: 'unpaid', apr: 'unpaid', may: 'unpaid', jun: 'unpaid', jul: 'paid', aug: 'unpaid', sep: 'unpaid', oct: 'unpaid', nov: 'unpaid', dec: 'unpaid'} },
-            { id: 10, admissionNo: "CW-2025-S010", name: "মানব রায়", father: "অনিল কুমার রায়", dob: "08/12/2010", mobile: "9064350393", course: "বেসিক কম্পিউটার", admissionDate: "07/05/2025", fee: 300, 
+            { id: 10, admissionNo: "CW-2025-S010", name: "Manab Roy", father: "Anil Kumar Roy", dob: "08/12/2010", mobile: "9064350393", course: "Basic Computer", admissionDate: "07/05/2025", fee: 300, 
               months: {jan: 'unpaid', feb: 'unpaid', mar: 'unpaid', apr: 'unpaid', may: 'unpaid', jun: 'unpaid', jul: 'unpaid', aug: 'unpaid', sep: 'unpaid', oct: 'unpaid', nov: 'unpaid', dec: 'unpaid'} },
         ];
 
         // Months for display
         const months = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
         const monthNames = {
-            jan: 'জানু', feb: 'ফেব্রু', mar: 'মার্চ', apr: 'এপ্রিল', 
-            may: 'মে', jun: 'জুন', jul: 'জুলাই', aug: 'আগস্ট', 
-            sep: 'সেপ্ট', oct: 'অক্টো', nov: 'নভেম', dec: 'ডিসেম'
+            jan: 'Jan', feb: 'Feb', mar: 'Mar', apr: 'Apr', 
+            may: 'May', jun: 'Jun', jul: 'Jul', aug: 'Aug', 
+            sep: 'Sep', oct: 'Oct', nov: 'Nov', dec: 'Dec'
         };
+
+        // Global variables
+        let currentEditId = null;
+        let studentToDelete = null;
 
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
-            renderTable();
-            updateDashboard();
+            // Event listeners for login
+            document.getElementById('loginBtn').addEventListener('click', login);
+            document.getElementById('logoutBtn').addEventListener('click', logout);
+            document.getElementById('username').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') login();
+            });
+            document.getElementById('password').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') login();
+            });
             
-            // Event listeners
+            // Event listeners for app functionality
             document.getElementById('openAdd').addEventListener('click', openAddForm);
             document.getElementById('cancelBtn').addEventListener('click', closeForm);
             document.getElementById('studentForm').addEventListener('submit', saveStudent);
             document.getElementById('exportCSV').addEventListener('click', exportCSV);
             document.getElementById('searchInput').addEventListener('input', filterStudents);
+            
+            // Modal event listeners
+            document.getElementById('cancelDelete').addEventListener('click', closeModal);
+            document.getElementById('confirmDelete').addEventListener('click', deleteConfirmed);
         });
+
+        // Login function
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMessage = document.getElementById('errorMessage');
+            
+            if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+                // Successful login
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('appContainer').style.display = 'block';
+                
+                // Initialize the app
+                renderTable();
+                updateDashboard();
+            } else {
+                // Show error message
+                errorMessage.style.display = 'block';
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        // Logout function
+        function logout() {
+            document.getElementById('loginSection').style.display = 'block';
+            document.getElementById('appContainer').style.display = 'none';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            closeForm();
+        }
 
         // Render student table
         function renderTable() {
@@ -608,13 +923,13 @@
                 
                 // Determine status
                 let status = 'unpaid';
-                let statusText = 'বকেয়া';
+                let statusText = 'Due';
                 if (due === 0) {
                     status = 'paid';
-                    statusText = 'পূর্ণ পরিশোধিত';
+                    statusText = 'Paid';
                 } else if (paid > 0) {
                     status = 'partial';
-                    statusText = 'আংশিক পরিশোধিত';
+                    statusText = 'Partial';
                 }
                 
                 // Create row HTML
@@ -636,9 +951,14 @@
                     <td>₹${due}</td>
                     <td><span class="status-badge status-${status}">${statusText}</span></td>
                     <td>
-                        <button class="btn" onclick="editStudent('${student.id}')" style="padding: 5px 10px;">
-                            <i class="fas fa-edit"></i>
-                        </button>
+                        <div class="action-buttons">
+                            <button class="btn-app" onclick="editStudent(${student.id})" style="padding: 5px 10px;">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="btn-app danger" onclick="showDeleteModal(${student.id})" style="padding: 5px 10px;">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
                     </td>
                 `;
                 
@@ -672,9 +992,9 @@
         // Get status text
         function getStatusText(status) {
             const statusMap = {
-                'paid': 'পরিশোধিত',
-                'unpaid': 'বকেয়া',
-                'free': 'মুক্ত'
+                'paid': 'Paid',
+                'unpaid': 'Due',
+                'free': 'Free'
             };
             return statusMap[status] || status;
         }
@@ -712,20 +1032,22 @@
             document.getElementById('currentMonth').textContent = `₹${currentMonthPaid}`;
             
             // Update badges
-            document.getElementById('paidBadge').innerHTML = `<i class="fas fa-check-circle"></i> পূর্ণ পরিশোধিত: ${paidCount}`;
-            document.getElementById('unpaidBadge').innerHTML = `<i class="fas fa-exclamation-triangle"></i> বকেয়া: ${unpaidCount}`;
-            document.getElementById('partialBadge').innerHTML = `<i class="fas fa-adjust"></i> আংশিক: ${partialCount}`;
+            document.getElementById('paidBadge').innerHTML = `<i class="fas fa-check-circle"></i> Paid: ${paidCount}`;
+            document.getElementById('unpaidBadge').innerHTML = `<i class="fas fa-exclamation-triangle"></i> Unpaid: ${unpaidCount}`;
+            document.getElementById('partialBadge').innerHTML = `<i class="fas fa-adjust"></i> Partial: ${partialCount}`;
         }
 
         // Form functions
         function openAddForm() {
             document.getElementById('formPanel').classList.add('active');
-            document.getElementById('formTitle').textContent = 'নতুন ছাত্র যোগ করুন';
+            document.getElementById('formTitle').textContent = 'Add New Student';
             document.getElementById('studentForm').reset();
+            currentEditId = null;
         }
 
         function closeForm() {
             document.getElementById('formPanel').classList.remove('active');
+            currentEditId = null;
         }
 
         function editStudent(studentId) {
@@ -739,8 +1061,9 @@
             document.getElementById('inpCourse').value = student.course;
             document.getElementById('inpFee').value = student.fee;
             
-            document.getElementById('formTitle').textContent = 'ছাত্রের তথ্য সম্পাদনা করুন';
+            document.getElementById('formTitle').textContent = 'Edit Student Information';
             document.getElementById('formPanel').classList.add('active');
+            currentEditId = studentId;
         }
 
         function saveStudent(e) {
@@ -753,28 +1076,64 @@
             const course = document.getElementById('inpCourse').value;
             const fee = parseInt(document.getElementById('inpFee').value) || 300;
             
-            // Create new student
-            const newStudent = {
-                id: Date.now(), // Unique ID
-                admissionNo: admissionNo || `CW-${new Date().getFullYear()}-S${students.length + 100}`,
-                name,
-                father,
-                mobile,
-                dob: '',
-                course,
-                admissionDate: new Date().toLocaleDateString('en-GB'),
-                fee,
-                months: {
-                    jan: 'unpaid', feb: 'unpaid', mar: 'unpaid', apr: 'unpaid', 
-                    may: 'unpaid', jun: 'unpaid', jul: 'unpaid', aug: 'unpaid', 
-                    sep: 'unpaid', oct: 'unpaid', nov: 'unpaid', dec: 'unpaid'
+            if (currentEditId !== null) {
+                // Update existing student
+                const index = students.findIndex(s => s.id == currentEditId);
+                if (index !== -1) {
+                    students[index].name = name;
+                    students[index].father = father;
+                    students[index].mobile = mobile;
+                    students[index].admissionNo = admissionNo;
+                    students[index].course = course;
+                    students[index].fee = fee;
                 }
-            };
+            } else {
+                // Create new student
+                const newStudent = {
+                    id: Date.now(), // Unique ID
+                    admissionNo: admissionNo || `CW-${new Date().getFullYear()}-S${students.length + 100}`,
+                    name,
+                    father,
+                    mobile,
+                    dob: '',
+                    course,
+                    admissionDate: new Date().toLocaleDateString('en-GB'),
+                    fee,
+                    months: {
+                        jan: 'unpaid', feb: 'unpaid', mar: 'unpaid', apr: 'unpaid', 
+                        may: 'unpaid', jun: 'unpaid', jul: 'unpaid', aug: 'unpaid', 
+                        sep: 'unpaid', oct: 'unpaid', nov: 'unpaid', dec: 'unpaid'
+                    }
+                };
+                
+                students.push(newStudent);
+            }
             
-            students.push(newStudent);
             renderTable();
             updateDashboard();
             closeForm();
+        }
+
+        // Show delete confirmation modal
+        function showDeleteModal(studentId) {
+            studentToDelete = studentId;
+            document.getElementById('confirmationModal').style.display = 'flex';
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('confirmationModal').style.display = 'none';
+            studentToDelete = null;
+        }
+
+        // Delete confirmed
+        function deleteConfirmed() {
+            if (studentToDelete !== null) {
+                students = students.filter(student => student.id !== studentToDelete);
+                renderTable();
+                updateDashboard();
+                closeModal();
+            }
         }
 
         // Filter students
@@ -803,9 +1162,9 @@
             
             // Headers
             const headers = [
-                'ক্রমিক নং', 'ভর্তি নম্বর', 'ছাত্রছাত্রীর নাম', 'পিতার নাম', 'জন্ম তারিখ', 
-                'মোবাইল নম্বর', 'কোর্সের নাম', 'ভর্তির তারিখ', ...months.map(m => monthNames[m]), 
-                'মোট প্রদত্ত', 'বকেয়া', 'অবস্থা'
+                'SL No', 'Admission No', 'Student Name', "Father's Name", 'DOB', 
+                'Mobile', 'Course', 'Admission Date', ...months.map(m => monthNames[m]), 
+                'Total Paid', 'Due', 'Status'
             ];
             csvContent += headers.join(',') + '\r\n';
             
@@ -813,9 +1172,9 @@
             students.forEach((student, index) => {
                 const paid = calculatePaid(student);
                 const due = calculateDue(student);
-                let status = 'বকেয়া';
-                if (due === 0) status = 'পূর্ণ পরিশোধিত';
-                else if (paid > 0) status = 'আংশিক পরিশোধিত';
+                let status = 'Due';
+                if (due === 0) status = 'Paid';
+                else if (paid > 0) status = 'Partial';
                 
                 const row = [
                     index + 1,
