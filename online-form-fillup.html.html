@@ -1,108 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-   <script>
-        // Google Drive API কনফিগারেশন
-        const CLIENT_ID = 'YOUR_CLIENT_ID.apps.googleusercontent.com';
-        const API_KEY = 'YOUR_API_KEY';
-        const FOLDER_ID = '14lUd9Li2uKKIgo3fHp50wFxYirsMurKU';
-        
-        let gapiInited = false;
-        let gisInited = false;
-
-        function gapiLoaded() {
-            gapi.load('client', initializeGapiClient);
-        }
-
-        async function initializeGapiClient() {
-            await gapi.client.init({
-                apiKey: API_KEY,
-                discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
-            });
-            gapiInited = true;
-        }
-
-        function gisLoaded() {
-            tokenClient = google.accounts.oauth2.initTokenClient({
-                client_id: CLIENT_ID,
-                scope: 'https://www.googleapis.com/auth/drive.file',
-                callback: '', // পরে সেট করা হবে
-            });
-            gisInited = true;
-        }
-
-        function handleFormSubmit(e) {
-            e.preventDefault();
-            
-            // ফর্ম ডেটা সংগ্রহ
-            const formData = new FormData(document.getElementById('admissionFormContent'));
-            const formObject = {};
-            formData.forEach((value, key) => formObject[key] = value);
-            
-            // ফাইল আপলোড হ্যান্ডলিং
-            const fileInput = document.querySelector('input[type="file"]');
-            if (fileInput.files.length > 0) {
-                uploadFile(fileInput.files[0], formObject);
-            } else {
-                saveToDrive(formObject);
-            }
-        }
-
-        async function uploadFile(file, formData) {
-            if (!gapiInited || !gisInited) {
-                alert('Google API লোড হচ্ছে... দয়া করে আবার চেষ্টা করুন');
-                return;
-            }
-
-            tokenClient.callback = async (resp) => {
-                if (resp.error !== undefined) {
-                    throw resp;
-                }
-                
-                const metadata = {
-                    name: `Admission_${formData.student_name}_${Date.now()}.json`,
-                    mimeType: 'application/json',
-                    parents: [FOLDER_ID]
-                };
-
-                const fileContent = JSON.stringify(formData, null, 2);
-                const blob = new Blob([fileContent], {type: 'application/json'});
-
-                try {
-                    await gapi.client.drive.files.create({
-                        resource: metadata,
-                        media: {
-                            mimeType: 'application/json',
-                            body: blob
-                        },
-                        fields: 'id'
-                    });
-                    
-                    alert('আপনার ফর্ম সফলভাবে জমা হয়েছে! আমরা শীঘ্রই আপনার সাথে যোগাযোগ করব।');
-                    window.close();
-                } catch (err) {
-                    console.error('Error uploading file:', err);
-                    alert('ফর্ম জমা দেওয়ার সময় একটি ত্রুটি ঘটেছে। দয়া করে পরে আবার চেষ্টা করুন।');
-                }
-            };
-
-            if (gapi.client.getToken() === null) {
-                tokenClient.requestAccessToken({prompt: ''});
-            } else {
-                tokenClient.requestAccessToken({prompt: ''});
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // পূর্বের ইভেন্ট লিসেনারগুলি অপরিবর্তিত
-            document.getElementById('admissionFormContent').addEventListener('submit', handleFormSubmit);
-        });
-    </script>
-</head>
-<body>
-    <!-- পূর্বের ফর্ম কন্টেন্ট অপরিবর্তিত -->
-</body>
-</html>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Click World - Admission Form</title>
@@ -380,6 +278,85 @@
       font-size: 16px;
     }
     
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .modal-content {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      max-width: 600px;
+      width: 90%;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+    
+    .modal-title {
+      font-size: 24px;
+      color: #1a5fd0;
+      margin-bottom: 20px;
+    }
+    
+    .declaration-text {
+      background: #f0f7ff;
+      padding: 25px;
+      border-radius: 10px;
+      margin-bottom: 25px;
+      line-height: 1.7;
+      font-size: 17px;
+      text-align: left;
+    }
+    
+    .modal-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .modal-btn {
+      padding: 12px 30px;
+      border-radius: 8px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 16px;
+    }
+    
+    .confirm-btn {
+      background: linear-gradient(to right, #00c853, #009624);
+      color: white;
+    }
+    
+    .cancel-btn {
+      background: linear-gradient(to right, #ff5252, #b33939);
+      color: white;
+    }
+    
+    .payment-details {
+      display: none;
+      margin-top: 15px;
+      padding: 15px;
+      background: #f0f7ff;
+      border-radius: 8px;
+    }
+    
+    .payment-details.show {
+      display: block;
+    }
+    
     @media (max-width: 768px) {
       .container {
         padding: 10px;
@@ -413,6 +390,15 @@
       .registration-btn {
         padding: 15px 35px;
         font-size: 18px;
+      }
+      
+      .modal-buttons {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .modal-btn {
+        width: 100%;
       }
     }
     
@@ -471,10 +457,10 @@
             <input type="text" name="student_name" required placeholder="Enter student's full name">
 
             <label>2. Date of Birth (DD/MM/YYYY):</label>
-            <input type="date" name="dob">
+            <input type="date" name="dob" id="dob">
 
             <label>3. Age:</label>
-            <input type="number" name="age" placeholder="Enter age">
+            <input type="text" name="age" id="age" placeholder="Age will be calculated" readonly>
 
             <label>4. Gender:</label>
             <div class="checkbox-group">
@@ -484,7 +470,11 @@
             </div>
 
             <label>5. Cast:</label>
-            <input type="text" name="cast" placeholder="Enter cast">
+            <div class="checkbox-group">
+              <label><input type="radio" name="cast" value="SC"> SC</label>
+              <label><input type="radio" name="cast" value="OBC"> OBC</label>
+              <label><input type="radio" name="cast" value="GENERAL"> GENERAL</label>
+            </div>
 
             <label>6. School Name:</label>
             <input type="text" name="school_name" placeholder="Enter school name">
@@ -505,8 +495,8 @@
             <label>10. Phone Number (Primary):</label>
             <input type="tel" name="phone_primary" placeholder="Enter primary phone number">
 
-            <label>11. Alternate Number (if any):</label>
-            <input type="tel" name="phone_alt" placeholder="Enter alternate phone number">
+            <label>11. WhatsApp Number:</label>
+            <input type="tel" name="whatsapp_number" placeholder="Enter WhatsApp number">
 
             <label>12. Address:</label>
             <textarea name="address" rows="3" placeholder="Enter complete address"></textarea>
@@ -534,10 +524,38 @@
 
           <div class="section">
             <h3>Batch Preference</h3>
+            <label>Select Class Day:</label>
             <div class="checkbox-group">
-              <label><input type="radio" name="batch" value="Morning"> Morning Batch (10:00 – 11:30)</label>
-              <label><input type="radio" name="batch" value="Mid-day"> Mid-day Batch (11:45 – 01:15)</label>
-              <label><input type="radio" name="batch" value="Afternoon"> Afternoon Batch (3:00 – 4:30)</label>
+              <label><input type="radio" name="batch_day" value="Saturday"> Saturday</label>
+              <label><input type="radio" name="batch_day" value="Sunday"> Sunday</label>
+            </div>
+            
+            <label>Select Batch Timing:</label>
+            <div class="checkbox-group">
+              <label><input type="radio" name="batch_time" value="Morning"> Morning Batch (10:00 – 11:30)</label>
+              <label><input type="radio" name="batch_time" value="Mid-day"> Mid-day Batch (11:45 – 01:15)</label>
+              <label><input type="radio" name="batch_time" value="Afternoon"> Afternoon Batch (3:00 – 4:30)</label>
+            </div>
+          </div>
+          
+          <div class="section">
+            <h3>Payment Method</h3>
+            <div class="checkbox-group">
+              <label><input type="radio" name="payment_method" value="Cash" checked> Cash</label>
+              <label><input type="radio" name="payment_method" value="Online"> Online Payment</label>
+            </div>
+            
+            <div class="payment-details" id="onlinePaymentDetails">
+              <label>Online Payment Method:</label>
+              <div class="checkbox-group">
+                <label><input type="radio" name="online_method" value="Google Pay"> Google Pay</label>
+                <label><input type="radio" name="online_method" value="PhonePe"> PhonePe</label>
+                <label><input type="radio" name="online_method" value="UPI"> UPI</label>
+                <label><input type="radio" name="online_method" value="QR"> QR Code</label>
+              </div>
+              
+              <label>Transaction ID/Reference:</label>
+              <input type="text" name="transaction_id" placeholder="Enter transaction ID or reference">
             </div>
           </div>
 
@@ -556,7 +574,7 @@
             <input type="date" name="declaration_date">
 
             <label>Signature of Parent/Guardian (Type Name):</label>
-            <input type="text" name="guardian_signature" placeholder="Enter your full name">
+            <input type="text" name="guardian_signature" placeholder="Enter your full name" required>
           </div>
 
           <button type="submit">Submit Admission Form</button>
@@ -572,12 +590,37 @@
       </div>
     </div>
   </div>
+  
+  <!-- Declaration Modal -->
+  <div class="modal" id="declarationModal">
+    <div class="modal-content">
+      <h2 class="modal-title">Admission Declaration</h2>
+      <div class="declaration-text">
+        <p>I hereby declare that I am voluntarily applying for admission to Click World Computer Education Center.</p>
+        <p>I have personally researched and inquired about the courses, facilities, and reputation of Click World Computer Center.</p>
+        <p>I understand and agree to abide by all the rules and regulations of the center.</p>
+        <p>I confirm that all information provided in this form is accurate to the best of my knowledge.</p>
+      </div>
+      <p>By clicking "Confirm & Submit", I acknowledge that I have read and agree to the above declaration.</p>
+      <div class="modal-buttons">
+        <button class="modal-btn confirm-btn" id="confirmSubmit">Confirm & Submit</button>
+        <button class="modal-btn cancel-btn" id="cancelSubmit">Cancel</button>
+      </div>
+    </div>
+  </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const showFormBtn = document.getElementById('showFormBtn');
       const admissionForm = document.getElementById('admissionForm');
       const formContent = document.getElementById('admissionFormContent');
+      const dobInput = document.getElementById('dob');
+      const ageInput = document.getElementById('age');
+      const paymentMethods = document.querySelectorAll('input[name="payment_method"]');
+      const onlinePaymentDetails = document.getElementById('onlinePaymentDetails');
+      const declarationModal = document.getElementById('declarationModal');
+      const confirmSubmitBtn = document.getElementById('confirmSubmit');
+      const cancelSubmitBtn = document.getElementById('cancelSubmit');
       
       // Show form when registration button is clicked
       showFormBtn.addEventListener('click', function() {
@@ -585,11 +628,62 @@
         showFormBtn.style.display = 'none';
       });
       
+      // Auto calculate age from date of birth
+      dobInput.addEventListener('change', function() {
+        if (dobInput.value) {
+          const birthDate = new Date(dobInput.value);
+          const today = new Date();
+          let age = today.getFullYear() - birthDate.getFullYear();
+          const monthDiff = today.getMonth() - birthDate.getMonth();
+          
+          if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+            age--;
+          }
+          
+          ageInput.value = age + ' years';
+        }
+      });
+      
+      // Show/hide online payment details
+      paymentMethods.forEach(method => {
+        method.addEventListener('change', function() {
+          if (this.value === 'Online') {
+            onlinePaymentDetails.classList.add('show');
+          } else {
+            onlinePaymentDetails.classList.remove('show');
+          }
+        });
+      });
+      
       // Form submission handling
       formContent.addEventListener('submit', function(e) {
         e.preventDefault();
         
-        // Form validation would go here
+        // Basic form validation
+        const requiredFields = formContent.querySelectorAll('[required]');
+        let valid = true;
+        
+        requiredFields.forEach(field => {
+          if (!field.value.trim()) {
+            valid = false;
+            field.style.borderColor = 'red';
+          } else {
+            field.style.borderColor = '#ddd';
+          }
+        });
+        
+        if (!valid) {
+          alert('Please fill in all required fields marked in red');
+          return;
+        }
+        
+        // Show declaration modal
+        declarationModal.style.display = 'flex';
+      });
+      
+      // Confirm declaration and submit
+      confirmSubmitBtn.addEventListener('click', function() {
+        declarationModal.style.display = 'none';
         
         // Show success message
         alert('Admission form submitted successfully! We will contact you shortly.');
@@ -598,6 +692,12 @@
         formContent.reset();
         admissionForm.classList.remove('show');
         showFormBtn.style.display = 'inline-flex';
+        onlinePaymentDetails.classList.remove('show');
+      });
+      
+      // Cancel declaration
+      cancelSubmitBtn.addEventListener('click', function() {
+        declarationModal.style.display = 'none';
       });
     });
   </script>
