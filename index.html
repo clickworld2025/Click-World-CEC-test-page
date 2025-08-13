@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ক্লিক ওয়ার্ল্ড কম্পিউটার এডুকেশন সেন্টার</title>
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google API -->
     <script src="https://apis.google.com/js/api.js"></script>
     <script>
         function loadGAPI() {
@@ -14,145 +14,25 @@
 
         function initClient() {
             gapi.client.init({
-                apiKey: 'YOUR_API_KEY',
-                clientId: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
+                apiKey: 'YOUR_ACTUAL_API_KEY',
+                clientId: 'YOUR_ACTUAL_CLIENT_ID.apps.googleusercontent.com',
                 discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
                 scope: 'https://www.googleapis.com/auth/drive.file'
+            }).then(function() {
+                console.log("Google API initialized successfully");
+            }).catch(function(error) {
+                console.error("Error initializing Google API:", error);
             });
         }
+        
+        // Load the API when the page loads
+        window.addEventListener('load', loadGAPI);
     </script>
-    <style>
-        /* আপনার সমস্ত CSS স্টাইল এখানে রাখুন */
-        /* ... পূর্বের সমস্ত CSS কোড ... */
-        
-        /* নতুন স্টাইল যোগ করুন */
-        .fee-register-btn {
-            position: fixed;
-            top: 120px;
-            right: 20px;
-            z-index: 999;
-            display:inline-block;
-            background-color:#2563eb;
-            color:#fff;
-            padding:10px 20px;
-            border-radius:6px;
-            font-size:16px;
-            text-decoration:none;
-            font-weight:bold;
-            box-shadow:0 4px 8px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-        }
-        
-        .fee-register-btn:hover {
-            background-color:#1d4ed8;
-            transform: translateY(-2px);
-            box-shadow:0 6px 12px rgba(0,0,0,0.3);
-        }
-        
-        @media (max-width: 768px) {
-            .fee-register-btn {
-                top: 100px;
-                right: 10px;
-                padding: 8px 15px;
-                font-size: 14px;
-            }
-        }
-        
-        /* বাকি সব CSS স্টাইল */
-        :root {
-            --primary: #2563eb;
-            --secondary: #0ea5e9;
-            --accent: #8b5cf6;
-            --dark: #1e293b;
-            --light: #f8fafc;
-            --success: #10b981;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Hind Siliguri', sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            color: var(--dark);
-            line-height: 1.6;
-        }
-        
-        /* বাকি সব CSS */
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo">
-                    <img src="clickworld-logo.png" alt="Click World Logo" style="height: 50px; margin-right: 10px;">
-                    <div class="logo-text">ডিজিটাল <span>লার্নিং</span></div>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="#home">হোম</a></li>
-                    <li><a href="#courses">কোর্সসমূহ</a></li>
-                    <li><a href="#features">সুবিধা</a></li>
-                    <li><a href="#about">আমাদের সম্পর্কে</a></li>
-                    <li><a href="#contact">যোগাযোগ</a></li>
-                    <!-- এডমিন লগইন বাটন যোগ করুন -->
-                    <li>
-                        <a href="admission-data-access.html" class="btn" style="padding: 8px 15px; font-size: 0.9rem;">
-                            <i class="fas fa-lock"></i> এডমিন লগইন
-                        </a>
-                    </li>
-                </ul>
-                <a href="#enroll" class="btn">রেজিস্ট্রেশন করুন</a>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Student Fee Register Button -->
-    <a href="student-fee-register.html" target="_blank" class="fee-register-btn">
-        📄 Open Student Fee Register
-    </a>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <div class="tagline">ডিজিটাল দেশ গড়ার প্রত্যয়</div>
-                    <h1>ক্লিক ওয়ার্ল্ড কম্পিউটার <span class="highlight">এডুকেশন সেন্টার</span> এ আপনাকে স্বাগতম</h1>
-                    <p>আধুনিক প্রযুক্তির সাথে তাল মিলিয়ে চলতে প্রয়োজন দক্ষতা। আমাদের বিশেষজ্ঞ প্রশিক্ষকদের তত্ত্বাবধানে গুণগত শিক্ষা গ্রহণ করুন এবং ক্যারিয়ারে সফল হোন।</p>
-                    <div class="btn-group">
-                        <a href="#courses" class="btn">কোর্স এক্সপ্লোর করুন</a>
-                        <a href="#contact" class="btn btn-outline">যোগাযোগ করুন</a>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='400' viewBox='0 0 500 400'><rect width='500' height='400' fill='%232563eb' opacity='0.1' rx='20'/><circle cx='250' cy='150' r='80' fill='%232563eb' opacity='0.2'/><rect x='150' y='250' width='200' height='80' fill='%232563eb' opacity='0.3' rx='10'/></svg>" alt="Computer Education">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- বাকি সব সেকশন -->
-
-    <script>
-        // আপনার সমস্ত JavaScript কোড এখানে রাখুন
-        // ... পূর্বের সমস্ত JavaScript কোড ...
-    </script>
-</body>
-</html>
-
-    <!-- বাকি সবকিছু অপরিবর্তিত রাখুন -->
-</body>
-</html>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ক্লিক ওয়ার্ল্ড কম্পিউটার এডুকেশন সেন্টার</title>
+    
+    <!-- Stylesheets -->
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
             --primary: #2563eb;
@@ -205,9 +85,8 @@
             align-items: center;
         }
         
-        .logo i {
-            font-size: 2.2rem;
-            color: var(--primary);
+        .logo img {
+            height: 50px;
             margin-right: 10px;
         }
         
@@ -227,7 +106,7 @@
         }
         
         .nav-links li {
-            margin-left: 30px;
+            margin-left: 20px;
         }
         
         .nav-links a {
@@ -291,6 +170,53 @@
             color: white;
         }
         
+        /* Fixed Action Buttons */
+        .fixed-action-btns {
+            position: fixed;
+            top: 120px;
+            right: 20px;
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .action-btn {
+            display: inline-block;
+            background-color: var(--primary);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-size: 16px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .action-btn:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        
+        .action-btn i {
+            margin-right: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .fixed-action-btns {
+                top: 100px;
+                right: 10px;
+            }
+            
+            .action-btn {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+        }
+        
         /* Hero Section */
         .hero {
             padding: 160px 0 100px;
@@ -298,484 +224,8 @@
             background-size: 40px;
         }
         
-        .hero-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 40px;
-        }
-        
-        .hero-text {
-            flex: 1;
-            max-width: 600px;
-        }
-        
-        .hero-image {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-        }
-        
-        .hero-image img {
-            max-width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-        
-        .tagline {
-            font-size: 1.2rem;
-            color: var(--primary);
-            font-weight: 600;
-            margin-bottom: 15px;
-        }
-        
-        h1 {
-            font-size: 3.2rem;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            color: var(--dark);
-        }
-        
-        .highlight {
-            color: var(--primary);
-            position: relative;
-            display: inline-block;
-        }
-        
-        .highlight::after {
-            content: '';
-            position: absolute;
-            bottom: 5px;
-            left: 0;
-            width: 100%;
-            height: 15px;
-            background: rgba(37, 99, 235, 0.2);
-            z-index: -1;
-        }
-        
-        .hero p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            color: #475569;
-        }
-        
-        .btn-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        /* Features Section */
-        .features {
-            padding: 100px 0;
-            background-color: white;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 15px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background: var(--primary);
-            border-radius: 2px;
-        }
-        
-        .section-title p {
-            max-width: 700px;
-            margin: 20px auto 0;
-            color: #64748b;
-            font-size: 1.1rem;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .feature-card {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
-            text-align: center;
-            border: 1px solid #e2e8f0;
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-        }
-        
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 25px;
-            color: white;
-            font-size: 2rem;
-        }
-        
-        .feature-card h3 {
-            font-size: 1.4rem;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-        
-        .feature-card p {
-            color: #64748b;
-        }
-        
-        /* Courses Section */
-        .courses {
-            padding: 100px 0;
-            background: #f1f5f9;
-        }
-        
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .course-card {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s;
-        }
-        
-        .course-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .course-image {
-            height: 200px;
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 4rem;
-        }
-        
-        .course-content {
-            padding: 25px;
-        }
-        
-        .course-content h3 {
-            font-size: 1.4rem;
-            margin-bottom: 12px;
-            color: var(--dark);
-        }
-        
-        .course-content p {
-            color: #64748b;
-            margin-bottom: 20px;
-        }
-        
-        .course-meta {
-            display: flex;
-            justify-content: space-between;
-            color: var(--primary);
-            font-weight: 600;
-            margin-top: 20px;
-        }
-        
-        /* Testimonials */
-        .testimonials {
-            padding: 100px 0;
-            background: white;
-        }
-        
-        .testimonial-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-        
-        .testimonial-card {
-            background: #f8fafc;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            position: relative;
-            border: 1px solid #e2e8f0;
-        }
-        
-        .testimonial-card::before {
-            content: '"';
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            font-size: 4rem;
-            color: var(--primary);
-            opacity: 0.1;
-            font-family: serif;
-            line-height: 1;
-        }
-        
-        .testimonial-content {
-            margin-top: 30px;
-            color: #475569;
-            font-style: italic;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            margin-top: 25px;
-        }
-        
-        .author-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-            margin-right: 15px;
-        }
-        
-        .author-info h4 {
-            color: var(--dark);
-            margin-bottom: 5px;
-        }
-        
-        .author-info p {
-            color: #64748b;
-            font-size: 0.9rem;
-        }
-        
-        /* CTA Section */
-        .cta {
-            padding: 100px 0;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            color: white;
-            text-align: center;
-        }
-        
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        
-        .cta p {
-            max-width: 700px;
-            margin: 0 auto 40px;
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-        
-        .cta .btn {
-            background: white;
-            color: var(--primary);
-            font-weight: 600;
-            padding: 15px 40px;
-            font-size: 1.1rem;
-        }
-        
-        .cta .btn:hover {
-            background: #e2e8f0;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 80px 0 30px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 60px;
-        }
-        
-        .footer-column h3 {
-            font-size: 1.4rem;
-            margin-bottom: 25px;
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--primary);
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-        
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-        
-        .footer-links a {
-            color: #cbd5e1;
-            text-decoration: none;
-            transition: color 0.3s;
-            display: flex;
-            align-items: center;
-        }
-        
-        .footer-links a:hover {
-            color: white;
-        }
-        
-        .footer-links a i {
-            margin-right: 10px;
-            color: var(--primary);
-        }
-        
-        .contact-info {
-            color: #cbd5e1;
-        }
-        
-        .contact-info p {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        
-        .contact-info i {
-            margin-right: 15px;
-            color: var(--primary);
-            width: 20px;
-            text-align: center;
-        }
-        
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-        
-        .social-links a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-        
-        .social-links a:hover {
-            background: var(--primary);
-            transform: translateY(-3px);
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #94a3b8;
-            font-size: 0.9rem;
-        }
-        
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            h1 {
-                font-size: 2.8rem;
-            }
-            
-            .hero-content {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .btn-group {
-                justify-content: center;
-            }
-            
-            .hero-text {
-                max-width: 100%;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                padding: 15px 0;
-            }
-            
-            .nav-links {
-                margin-top: 20px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .nav-links li {
-                margin: 10px 15px;
-            }
-            
-            h1 {
-                font-size: 2.3rem;
-            }
-            
-            .hero {
-                padding: 180px 0 80px;
-            }
-            
-            .section-title h2 {
-                font-size: 2rem;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .btn-group {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .btn {
-                width: 100%;
-                text-align: center;
-            }
-        }
+        /* Rest of your CSS styles... */
+        /* ... (keep all your existing CSS styles below this point) ... */
     </style>
 </head>
 <body>
@@ -784,7 +234,7 @@
         <div class="container">
             <nav class="navbar">
                 <div class="logo">
-                    <i class="fas fa-laptop-code"></i>
+                    <img src="clickworld-logo.png" alt="Click World Logo">
                     <div class="logo-text">ডিজিটাল <span>লার্নিং</span></div>
                 </div>
                 <ul class="nav-links">
@@ -793,11 +243,26 @@
                     <li><a href="#features">সুবিধা</a></li>
                     <li><a href="#about">আমাদের সম্পর্কে</a></li>
                     <li><a href="#contact">যোগাযোগ</a></li>
+                    <li>
+                        <a href="admission-data-access.html" class="btn" style="padding: 8px 15px; font-size: 0.9rem;">
+                            <i class="fas fa-lock"></i> এডমিন লগইন
+                        </a>
+                    </li>
                 </ul>
                 <a href="#enroll" class="btn">রেজিস্ট্রেশন করুন</a>
             </nav>
         </div>
     </header>
+
+    <!-- Fixed Action Buttons -->
+    <div class="fixed-action-btns">
+        <a href="student-fee-register.html" target="_blank" class="action-btn">
+            <i class="fas fa-file-invoice-dollar"></i> ফি রেজিস্টার
+        </a>
+        <a href="online-form-fillup.html" target="_blank" class="action-btn" style="background-color: var(--success);">
+            <i class="fas fa-file-alt"></i> অনলাইন ফর্ম
+        </a>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero" id="home">
@@ -963,7 +428,9 @@
         <div class="container">
             <h2>আজই এনরোল করুন</h2>
             <p>আপনার ভবিষ্যৎ ক্যারিয়ার গঠনের যাত্রা শুরু করুন। আমাদের পরবর্তী ব্যাচ শুরু হচ্ছে আগামী ১০ই তারিখ</p>
-            <a href="#" class="btn">এখনই রেজিস্ট্রেশন করুন</a>
+            <a href="online-form-fillup.html" class="btn">
+                <i class="fas fa-file-alt"></i> অনলাইন ফর্ম পূরণ করুন
+            </a>
         </div>
     </section>
 
@@ -989,6 +456,7 @@
                         <li><a href="#features"><i class="fas fa-chevron-right"></i> সুবিধাসমূহ</a></li>
                         <li><a href="#about"><i class="fas fa-chevron-right"></i> আমাদের সম্পর্কে</a></li>
                         <li><a href="#contact"><i class="fas fa-chevron-right"></i> যোগাযোগ</a></li>
+                        <li><a href="online-form-fillup.html"><i class="fas fa-chevron-right"></i> অনলাইন ফর্ম</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
@@ -1060,190 +528,6 @@
         // Run on load and scroll
         window.addEventListener('load', animateOnScroll);
         window.addEventListener('scroll', animateOnScroll);
-    </script>
-</body>
-</html>
-I'll analyze the HTML code you've provided and suggest improvements:
-
-Issues Identified:
-Duplicate HTML Structure: The code contains two complete HTML document structures (two <html> tags, two <head> sections, etc.). This is invalid HTML.
-
-Duplicate Google API Script: The Google API script and initialization code appears twice.
-
-Mixed Content: There are both English and Bengali (Bangla) content mixed together in some parts.
-
-Placeholder Values: The Google API credentials still have placeholder values ('YOUR_API_KEY', 'YOUR_CLIENT_ID').
-
-Inconsistent Logo: There are two different logo implementations - one with an image, one with an icon.
-
-Recommended Fixes:
-Remove Duplicate HTML Structure: Keep only one <html>, <head>, and <body> structure.
-
-Consolidate Scripts: Combine the Google API scripts into one place in the head section.
-
-Localize Consistently: Choose either English or Bengali for the interface text (or properly implement bilingual support).
-
-Update API Credentials: Replace the placeholder values with actual API credentials.
-
-Standardize Logo: Choose one logo implementation (either image or icon) and use it consistently.
-
-Improved Code Structure:
-html
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ক্লিক ওয়ার্ল্ড কম্পিউটার এডুকেশন সেন্টার</title>
-    
-    <!-- Google API -->
-    <script src="https://apis.google.com/js/api.js"></script>
-    <script>
-        function loadGAPI() {
-            gapi.load('client:auth2', initClient);
-        }
-
-        function initClient() {
-            gapi.client.init({
-                apiKey: 'YOUR_ACTUAL_API_KEY',
-                clientId: 'YOUR_ACTUAL_CLIENT_ID.apps.googleusercontent.com',
-                discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
-                scope: 'https://www.googleapis.com/auth/drive.file'
-            });
-        }
-    </script>
-    
-    <!-- Stylesheets -->
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* All your CSS styles here */
-        /* ... */
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo">
-                    <img src="clickworld-logo.png" alt="Click World Logo" style="height: 50px; margin-right: 10px;">
-                    <div class="logo-text">ডিজিটাল <span>লার্নিং</span></div>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="#home">হোম</a></li>
-                    <li><a href="#courses">কোর্সসমূহ</a></li>
-                    <li><a href="#features">সুবিধা</a></li>
-                    <li><a href="#about">আমাদের সম্পর্কে</a></li>
-                    <li><a href="#contact">যোগাযোগ</a></li>
-                </ul>
-                <a href="#enroll" class="btn">রেজিস্ট্রেশন করুন</a>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Student Fee Register Button -->
-    <a href="student-fee-register.html" target="_blank" class="fee-register-btn">
-        📄 Open Student Fee Register
-    </a>
-
-    <!-- Rest of your content -->
-    <!-- ... -->
-
-    <script>
-        // Your JavaScript code here
-        // ...
-    </script>
-</body>
-</html>
-Additional Recommendations:
-Separate CSS: Move the CSS to an external stylesheet for better maintainability.
-
-Separate JavaScript: Move JavaScript to external files where possible.
-
-Form Validation: Add proper validation for any forms.
-
-Responsive Testing: Test on various screen sizes to ensure proper responsiveness.
-
-Accessibility: Add ARIA attributes and ensure proper contrast ratios for accessibility.
-
-Localization: If targeting Bengali users, ensure all interface text is properly translated.
-
-Error Handling: Add error handling for the Google API initialization.
-
-Would you like me to focus on improving any specific part of this code in more detail?
-
-<!DOCTYPE html>
-<html lang="bn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ক্লিক ওয়ার্ল্ড কম্পিউটার এডুকেশন সেন্টার</title>
-    
-    <!-- Google API -->
-    <script src="https://apis.google.com/js/api.js"></script>
-    <script>
-        function loadGAPI() {
-            gapi.load('client:auth2', initClient);
-        }
-
-        function initClient() {
-            gapi.client.init({
-                apiKey: 'YOUR_ACTUAL_API_KEY',
-                clientId: 'YOUR_ACTUAL_CLIENT_ID.apps.googleusercontent.com',
-                discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
-                scope: 'https://www.googleapis.com/auth/drive.file'
-            });
-        }
-    </script>
-    
-    <!-- Stylesheets -->
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        /* All your CSS styles here */
-        /* ... */
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo">
-                    <img src="clickworld-logo.png" alt="Click World Logo" style="height: 50px; margin-right: 10px;">
-                    <div class="logo-text">ডিজিটাল <span>লার্নিং</span></div>
-                </div>
-                <ul class="nav-links">
-                    <li><a href="#home">হোম</a></li>
-                    <li><a href="#courses">কোর্সসমূহ</a></li>
-                    <li><a href="#features">সুবিধা</a></li>
-                    <li><a href="#about">আমাদের সম্পর্কে</a></li>
-                    <li><a href="#contact">যোগাযোগ</a></li> 
-<li>
-    <a href="admission-data-access.html" class="btn" style="padding: 8px 15px; font-size: 0.9rem;">
-        <i class="fas fa-lock"></i> এডমিন লগইন
-    </a>
-</li>
-                </ul>
-                <a href="#enroll" class="btn">রেজিস্ট্রেশন করুন</a>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Student Fee Register Button -->
-    <a href="student-fee-register.html" target="_blank" class="fee-register-btn">
-        📄 Open Student Fee Register
-    </a>
-
-    <!-- Rest of your content -->
-    <!-- ... -->
-
-    <script>
-        // Your JavaScript code here
-        // ...
     </script>
 </body>
 </html>
