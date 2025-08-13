@@ -1,46 +1,26 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <script src="https://apis.google.com/js/api.js"></script>
-    <script>
-        function loadGAPI() {
-            gapi.load('client:auth2', initClient);
-        }
-
-        function initClient() {
-            gapi.client.init({
-                apiKey: 'YOUR_API_KEY',
-                clientId: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
-                discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
-                scope: 'https://www.googleapis.com/auth/drive.file'
-            });
-        }
-    </script>
-</head>
-<body>
-       <!DOCTYPE html>
-<html lang="bn">
-<head>
-    <script src="https://apis.google.com/js/api.js"></script>
-    <script>
-        function loadGAPI() {
-            gapi.load('client:auth2', initClient);
-        }
-
-        function initClient() {
-            gapi.client.init({
-                apiKey: 'YOUR_API_KEY',
-                clientId: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
-                discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
-                scope: 'https://www.googleapis.com/auth/drive.file'
-            });
-        }
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ক্লিক ওয়ার্ল্ড কম্পিউটার এডুকেশন সেন্টার</title>
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        function loadGAPI() {
+            gapi.load('client:auth2', initClient);
+        }
+
+        function initClient() {
+            gapi.client.init({
+                apiKey: 'YOUR_API_KEY',
+                clientId: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
+                discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
+                scope: 'https://www.googleapis.com/auth/drive.file'
+            });
+        }
+    </script>
     <style>
         /* আপনার সমস্ত CSS স্টাইল এখানে রাখুন */
         /* ... পূর্বের সমস্ত CSS কোড ... */
@@ -77,6 +57,31 @@
                 font-size: 14px;
             }
         }
+        
+        /* বাকি সব CSS স্টাইল */
+        :root {
+            --primary: #2563eb;
+            --secondary: #0ea5e9;
+            --accent: #8b5cf6;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --success: #10b981;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* বাকি সব CSS */
     </style>
 </head>
 <body>
@@ -94,6 +99,12 @@
                     <li><a href="#features">সুবিধা</a></li>
                     <li><a href="#about">আমাদের সম্পর্কে</a></li>
                     <li><a href="#contact">যোগাযোগ</a></li>
+                    <!-- এডমিন লগইন বাটন যোগ করুন -->
+                    <li>
+                        <a href="admission-data-access.html" class="btn" style="padding: 8px 15px; font-size: 0.9rem;">
+                            <i class="fas fa-lock"></i> এডমিন লগইন
+                        </a>
+                    </li>
                 </ul>
                 <a href="#enroll" class="btn">রেজিস্ট্রেশন করুন</a>
             </nav>
@@ -107,10 +118,25 @@
 
     <!-- Hero Section -->
     <section class="hero" id="home">
-        <!-- ... বাকি সমস্ত HTML কন্টেন্ট ... -->
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <div class="tagline">ডিজিটাল দেশ গড়ার প্রত্যয়</div>
+                    <h1>ক্লিক ওয়ার্ল্ড কম্পিউটার <span class="highlight">এডুকেশন সেন্টার</span> এ আপনাকে স্বাগতম</h1>
+                    <p>আধুনিক প্রযুক্তির সাথে তাল মিলিয়ে চলতে প্রয়োজন দক্ষতা। আমাদের বিশেষজ্ঞ প্রশিক্ষকদের তত্ত্বাবধানে গুণগত শিক্ষা গ্রহণ করুন এবং ক্যারিয়ারে সফল হোন।</p>
+                    <div class="btn-group">
+                        <a href="#courses" class="btn">কোর্স এক্সপ্লোর করুন</a>
+                        <a href="#contact" class="btn btn-outline">যোগাযোগ করুন</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='400' viewBox='0 0 500 400'><rect width='500' height='400' fill='%232563eb' opacity='0.1' rx='20'/><circle cx='250' cy='150' r='80' fill='%232563eb' opacity='0.2'/><rect x='150' y='250' width='200' height='80' fill='%232563eb' opacity='0.3' rx='10'/></svg>" alt="Computer Education">
+                </div>
+            </div>
+        </div>
     </section>
 
-    <!-- ... বাকি সমস্ত HTML সেকশন ... -->
+    <!-- বাকি সব সেকশন -->
 
     <script>
         // আপনার সমস্ত JavaScript কোড এখানে রাখুন
@@ -118,28 +144,6 @@
     </script>
 </body>
 </html>
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo">
-                    <img src="clickworld-logo.png" alt="Click World Logo" style="height: 50px; margin-right: 10px;">
-                    <div class="logo-text">ডিজিটাল <span>লার্নিং</span></div>
-                </div>
-                <!-- বাকি নেভিগেশন মেনু অপরিবর্তিত -->
-            </nav>
-        </div>
-    </header>
-
-    <!-- সিটিএ সেকশনে পরিবর্তন -->
-    <section class="cta" id="enroll">
-        <div class="container">
-            <h2>আজই এনরোল করুন</h2>
-            <p>আপনার ভবিষ্যৎ ক্যারিয়ার গঠনের যাত্রা শুরু করুন। আমাদের পরবর্তী ব্যাচ শুরু হচ্ছে আগামী ১০ই তারিখ</p>
-            <button onclick="window.open('admission-form.html','_blank','width=900,height=800')" class="btn">
-                এখনই রেজিস্ট্রেশন করুন
-            </button>
-        </div>
-    </section>
 
     <!-- বাকি সবকিছু অপরিবর্তিত রাখুন -->
 </body>
