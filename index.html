@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ক্লিক ওয়ার্ল্ড কম্পিউটার এডুকেশন সেন্টার</title>
+    <title>Click World Computer Education Center</title>
     
     <!-- Google API -->
     <script src="https://apis.google.com/js/api.js"></script>
@@ -41,6 +41,7 @@
             --dark: #1e293b;
             --light: #f8fafc;
             --success: #10b981;
+            --gallery-bg: #f0f7ff;
         }
         
         * {
@@ -219,13 +220,440 @@
         
         /* Hero Section */
         .hero {
-            padding: 160px 0 100px;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="none" stroke="%232563eb" stroke-width="0.5" opacity="0.1"/></svg>');
-            background-size: 40px;
+            padding: 160px 0 80px;
+            background: linear-gradient(120deg, #e0f2fe 0%, #dbeafe 100%);
+            position: relative;
+            overflow: hidden;
         }
         
-        /* Rest of your CSS styles... */
-        /* ... (keep all your existing CSS styles below this point) ... */
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><rect fill="%232563eb" opacity="0.1" width="200" height="200"/><path fill="none" stroke="%232563eb" stroke-width="2" opacity="0.2" d="M20,20 Q100,50 180,20 T180,180 Q100,150 20,180 T20,20"/></svg>');
+            background-size: cover;
+            background-position: center;
+            border-radius: 20px 0 0 20px;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-text {
+            flex: 1;
+            padding-right: 40px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        
+        .hero h1 .highlight {
+            color: var(--primary);
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #334155;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 15px;
+        }
+        
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: #64748b;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Features Section */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .feature-icon i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Courses Section */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .course-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .course-image {
+            height: 180px;
+            background: linear-gradient(45deg, #2563eb, #0ea5e9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .course-image i {
+            font-size: 4rem;
+            color: white;
+            opacity: 0.8;
+        }
+        
+        .course-content {
+            padding: 25px;
+        }
+        
+        .course-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+        
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            color: #64748b;
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            background: var(--gallery-bg);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            height: 250px;
+            position: relative;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        /* Student Work Section */
+        .student-work {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        }
+        
+        .work-container {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+        }
+        
+        .work-content {
+            flex: 1;
+            padding-right: 40px;
+        }
+        
+        .work-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .work-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Testimonials Section */
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 25px;
+            color: #475569;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-right: 15px;
+        }
+        
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(120deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+        }
+        
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 80px 0 0;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .footer-column p {
+            margin-bottom: 20px;
+            color: #cbd5e1;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a {
+            text-decoration: none;
+            color: #cbd5e1;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        
+        .footer-links a i {
+            margin-right: 10px;
+            font-size: 0.8rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .contact-info p {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            color: #cbd5e1;
+        }
+        
+        .contact-info i {
+            margin-right: 15px;
+            min-width: 20px;
+            color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                padding-right: 0;
+                margin-bottom: 40px;
+            }
+            
+            .hero::before {
+                width: 100%;
+                opacity: 0.1;
+            }
+            
+            .work-container {
+                flex-direction: column;
+            }
+            
+            .work-content {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -235,21 +663,22 @@
             <nav class="navbar">
                 <div class="logo">
                     <img src="clickworld-logo.png" alt="Click World Logo">
-                    <div class="logo-text">ডিজিটাল <span>লার্নিং</span></div>
+                    <div class="logo-text">Digital <span>Learning</span></div>
                 </div>
                 <ul class="nav-links">
-                    <li><a href="#home">হোম</a></li>
-                    <li><a href="#courses">কোর্সসমূহ</a></li>
-                    <li><a href="#features">সুবিধা</a></li>
-                    <li><a href="#about">আমাদের সম্পর্কে</a></li>
-                    <li><a href="#contact">যোগাযোগ</a></li>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#courses">Courses</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#work">Student Work</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
                     <li>
                         <a href="admission-data-access.html" class="btn" style="padding: 8px 15px; font-size: 0.9rem;">
-                            <i class="fas fa-lock"></i> এডমিন লগইন
+                            <i class="fas fa-lock"></i> Admin Login
                         </a>
                     </li>
                 </ul>
-                <a href="#enroll" class="btn">রেজিস্ট্রেশন করুন</a>
+                <a href="#enroll" class="btn">Register Now</a>
             </nav>
         </div>
     </header>
@@ -257,10 +686,7 @@
     <!-- Fixed Action Buttons -->
     <div class="fixed-action-btns">
         <a href="student-fee-register.html" target="_blank" class="action-btn">
-            <i class="fas fa-file-invoice-dollar"></i> ফি রেজিস্টার
-        </a>
-        <a href="online-form-fillup.html" target="_blank" class="action-btn" style="background-color: var(--success);">
-            <i class="fas fa-file-alt"></i> অনলাইন ফর্ম
+            <i class="fas fa-file-invoice-dollar"></i> Fee Register
         </a>
     </div>
 
@@ -269,16 +695,13 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <div class="tagline">ডিজিটাল দেশ গড়ার প্রত্যয়</div>
-                    <h1>ক্লিক ওয়ার্ল্ড কম্পিউটার <span class="highlight">এডুকেশন সেন্টার</span> এ আপনাকে স্বাগতম</h1>
-                    <p>আধুনিক প্রযুক্তির সাথে তাল মিলিয়ে চলতে প্রয়োজন দক্ষতা। আমাদের বিশেষজ্ঞ প্রশিক্ষকদের তত্ত্বাবধানে গুণগত শিক্ষা গ্রহণ করুন এবং ক্যারিয়ারে সফল হোন।</p>
+                    <div class="tagline">Building a Digital Nation</div>
+                    <h1>Welcome to Click World Computer <span class="highlight">Education Center</span></h1>
+                    <p>Stay ahead in the modern tech world with our expert-led courses. Gain quality education under experienced trainers and build a successful career in technology.</p>
                     <div class="btn-group">
-                        <a href="#courses" class="btn">কোর্স এক্সপ্লোর করুন</a>
-                        <a href="#contact" class="btn btn-outline">যোগাযোগ করুন</a>
+                        <a href="#courses" class="btn">Explore Courses</a>
+                        <a href="#contact" class="btn btn-outline">Contact Us</a>
                     </div>
-                </div>
-                <div class="hero-image">
-                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='400' viewBox='0 0 500 400'><rect width='500' height='400' fill='%232563eb' opacity='0.1' rx='20'/><circle cx='250' cy='150' r='80' fill='%232563eb' opacity='0.2'/><rect x='150' y='250' width='200' height='80' fill='%232563eb' opacity='0.3' rx='10'/></svg>" alt="Computer Education">
                 </div>
             </div>
         </div>
@@ -288,37 +711,37 @@
     <section class="features" id="features">
         <div class="container">
             <div class="section-title">
-                <h2>আমাদের বিশেষ সুবিধাসমূহ</h2>
-                <p>আধুনিক প্রযুক্তি ও অভিজ্ঞ মেন্টরদের সমন্বয়ে আমরা তৈরি করেছি আদর্শ শিক্ষার পরিবেশ</p>
+                <h2>Our Special Features</h2>
+                <p>Combining modern technology with experienced mentors to create the ideal learning environment</p>
             </div>
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-chalkboard-teacher"></i>
                     </div>
-                    <h3>অভিজ্ঞ প্রশিক্ষক</h3>
-                    <p>শিল্পে অভিজ্ঞতা সম্পন্ন প্রশিক্ষকদের দ্বারা পরিচালিত কোর্স</p>
+                    <h3>Experienced Trainers</h3>
+                    <p>Courses led by industry-experienced professionals</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-laptop"></i>
                     </div>
-                    <h3>আধুনিক ল্যাব</h3>
-                    <p>হাই-কনফিগারেশন কম্পিউটার ও প্রয়োজনীয় সফটওয়্যার সমৃদ্ধ ল্যাব</p>
+                    <h3>Modern Labs</h3>
+                    <p>High-configuration computers with necessary software</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-project-diagram"></i>
                     </div>
-                    <h3>প্রজেক্ট ভিত্তিক শিখন</h3>
-                    <p>বাস্তব জীবনের সমস্যা সমাধানের মাধ্যমে দক্ষতা বৃদ্ধি</p>
+                    <h3>Project-Based Learning</h3>
+                    <p>Develop skills through real-world problem solving</p>
                 </div>
                 <div class="feature-card">
                     <div class="feature-icon">
                         <i class="fas fa-briefcase"></i>
                     </div>
-                    <h3>ক্যারিয়ার গাইডেন্স</h3>
-                    <p>কোর্স শেষে চাকরি পেতে সহায়তা ও ইন্টার্নশিপ সুবিধা</p>
+                    <h3>Career Guidance</h3>
+                    <p>Job assistance and internship opportunities after course completion</p>
                 </div>
             </div>
         </div>
@@ -328,8 +751,8 @@
     <section class="courses" id="courses">
         <div class="container">
             <div class="section-title">
-                <h2>জনপ্রিয় কোর্সসমূহ</h2>
-                <p>চাহিদা অনুযায়ী কোর্স নির্বাচন করে শুরু করুন আপনার দক্ষতা বৃদ্ধির যাত্রা</p>
+                <h2>Popular Courses</h2>
+                <p>Choose in-demand courses to start your skill development journey</p>
             </div>
             <div class="courses-grid">
                 <div class="course-card">
@@ -337,11 +760,11 @@
                         <i class="fab fa-html5"></i>
                     </div>
                     <div class="course-content">
-                        <h3>ওয়েব ডিজাইন ও ডেভেলপমেন্ট</h3>
-                        <p>HTML5, CSS3, JavaScript, Bootstrap এবং React শিখে ওয়েব ডেভেলপার হোন</p>
+                        <h3>Web Design & Development</h3>
+                        <p>Become a web developer by learning HTML5, CSS3, JavaScript, Bootstrap and React</p>
                         <div class="course-meta">
-                            <span><i class="far fa-clock"></i> ৪ মাস</span>
-                            <span><i class="fas fa-tag"></i> ১২,০০০ টাকা</span>
+                            <span><i class="far fa-clock"></i> 4 Months</span>
+                            <span><i class="fas fa-tag"></i> 12,000 TK</span>
                         </div>
                     </div>
                 </div>
@@ -350,11 +773,11 @@
                         <i class="fas fa-database"></i>
                     </div>
                     <div class="course-content">
-                        <h3>ডাটাবেজ ম্যানেজমেন্ট</h3>
-                        <p>MySQL, MongoDB সহ ডেটাবেস ডিজাইন ও ম্যানেজমেন্ট শিখুন</p>
+                        <h3>Database Management</h3>
+                        <p>Learn database design and management with MySQL and MongoDB</p>
                         <div class="course-meta">
-                            <span><i class="far fa-clock"></i> ৩ মাস</span>
-                            <span><i class="fas fa-tag"></i> ১০,০০০ টাকা</span>
+                            <span><i class="far fa-clock"></i> 3 Months</span>
+                            <span><i class="fas fa-tag"></i> 10,000 TK</span>
                         </div>
                     </div>
                 </div>
@@ -363,13 +786,77 @@
                         <i class="fas fa-mobile-alt"></i>
                     </div>
                     <div class="course-content">
-                        <h3>মোবাইল অ্যাপ ডেভেলপমেন্ট</h3>
-                        <p>Android এবং iOS প্ল্যাটফর্মে অ্যাপ ডেভেলপমেন্ট শিখুন</p>
+                        <h3>Mobile App Development</h3>
+                        <p>Build apps for Android and iOS platforms</p>
                         <div class="course-meta">
-                            <span><i class="far fa-clock"></i> ৫ মাস</span>
-                            <span><i class="fas fa-tag"></i> ১৫,০০০ টাকা</span>
+                            <span><i class="far fa-clock"></i> 5 Months</span>
+                            <span><i class="fas fa-tag"></i> 15,000 TK</span>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>Photo Gallery</h2>
+                <p>Glimpses of our learning environment and activities</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%232563eb' opacity='0.2'/><circle cx='200' cy='150' r='80' fill='%230ea5e9' opacity='0.3'/><rect x='100' y='100' width='200' height='100' fill='white' opacity='0.6' rx='10'/></svg>" alt="Computer Lab">
+                    <div class="gallery-overlay">
+                        <h3>Modern Computer Lab</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%238b5cf6' opacity='0.2'/><circle cx='150' cy='120' r='50' fill='%230ea5e9' opacity='0.3'/><circle cx='250' cy='180' r='50' fill='%232563eb' opacity='0.3'/><rect x='50' y='50' width='300' height='200' fill='none' stroke='white' stroke-width='3' opacity='0.5' rx='15'/></svg>" alt="Classroom Session">
+                    <div class="gallery-overlay">
+                        <h3>Interactive Classroom</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%2310b981' opacity='0.2'/><path d='M100,200 Q200,100 300,200' stroke='%2310b981' stroke-width='10' fill='none' opacity='0.4'/><circle cx='200' cy='150' r='70' fill='white' opacity='0.5'/><text x='200' y='160' font-family='Arial' font-size='30' fill='%2310b981' text-anchor='middle' opacity='0.8'>CERTIFICATE</text></svg>" alt="Certificate">
+                    <div class="gallery-overlay">
+                        <h3>Certificate Distribution</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'><rect width='400' height='300' fill='%230ea5e9' opacity='0.2'/><circle cx='300' cy='100' r='60' fill='%232563eb' opacity='0.3'/><circle cx='100' cy='200' r='60' fill='%238b5cf6' opacity='0.3'/><rect x='150' y='80' width='100' height='140' fill='white' opacity='0.6' rx='5'/></svg>" alt="Project Work">
+                    <div class="gallery-overlay">
+                        <h3>Student Projects</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Student Work Section -->
+    <section class="student-work" id="work">
+        <div class="container">
+            <div class="section-title">
+                <h2>Student Work Portal</h2>
+                <p>Access and showcase your daily class projects</p>
+            </div>
+            <div class="work-container">
+                <div class="work-content">
+                    <h3>View Your Class Projects Online</h3>
+                    <p>Our students create amazing projects every day. Now you can access all your classwork and projects through our secure online portal.</p>
+                    <ul style="margin: 20px 0 30px; padding-left: 20px;">
+                        <li>Access your files anytime, anywhere</li>
+                        <li>Showcase your work to potential employers</li>
+                        <li>Get feedback from instructors</li>
+                        <li>Track your progress throughout the course</li>
+                    </ul>
+                    <a href="student-portal.html" class="btn">
+                        <i class="fas fa-laptop"></i> Access Student Portal
+                    </a>
+                </div>
+                <div class="work-image">
+                    <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='500' height='350' viewBox='0 0 500 350'><rect width='500' height='350' fill='%23e0f2fe' rx='15'/><rect x='50' y='50' width='400' height='250' fill='white' rx='10'/><rect x='70' y='80' width='360' height='40' fill='%232563eb' opacity='0.2' rx='5'/><circle cx='90' cy='100' r='8' fill='%23ef4444'/><circle cx='115' cy='100' r='8' fill='%23f59e0b'/><circle cx='140' cy='100' r='8' fill='%2310b981'/><rect x='70' y='140' width='100' height='80' fill='%23f0f9ff' rx='5'/><rect x='190' y='140' width='100' height='80' fill='%23f0f9ff' rx='5'/><rect x='310' y='140' width='100' height='80' fill='%23f0f9ff' rx='5'/><rect x='70' y='240' width='340' height='40' fill='%23dbeafe' rx='5'/></svg>" alt="Student Portal">
                 </div>
             </div>
         </div>
@@ -379,43 +866,43 @@
     <section class="testimonials">
         <div class="container">
             <div class="section-title">
-                <h2>ক্লিক ওয়ার্ল্ড কম্পিউটার এডুকেশন সেন্টারার প্রতিক্রিয়া</h2>
-                <p>আমাদের আনুষ্ঠানিক বক্তব্য</p>
+                <h2>What Our Students Say</h2>
+                <p>Feedback from our alumni community</p>
             </div>
             <div class="testimonial-grid">
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        "ক্লিক ওয়ার্ল্ড কম্পিউটার এডুকেশন সেন্টার আধুনিক প্রযুক্তি ভিত্তিক শিক্ষা প্রদানে অঙ্গীকারবদ্ধ একটি প্রতিষ্ঠান। এখানে প্রশিক্ষণ প্রদান করা হয় অভিজ্ঞ ও দক্ষ প্রশিক্ষকদের মাধ্যমে, যা শিক্ষার্থীদের হাতে-কলমে বাস্তব অভিজ্ঞতা অর্জনে সহায়তা করে। উচ্চমানের ল্যাব, প্রজেক্ট ভিত্তিক শিখন, এবং ক্যারিয়ার গাইডেন্সের মাধ্যমে শিক্ষার্থীরা কর্মক্ষেত্রে প্রতিযোগিতায় এগিয়ে থাকতে পারে। প্রযুক্তির দ্রুত অগ্রগতির সাথে তাল মিলিয়ে চলার জন্য ক্লিক ওয়ার্ল্ড একটি নির্ভরযোগ্য স্থান।"
+                        "Click World Computer Education Center is committed to providing technology-based education. Training is provided by experienced instructors, helping students gain practical, hands-on experience. Through high-quality labs, project-based learning, and career guidance, students can stay ahead in the competitive workplace."
                     </div>
                     <div class="testimonial-author">
-                        <div class="author-avatar">আ</div>
+                        <div class="author-avatar">A</div>
                         <div class="author-info">
-                            <h4>আরাফাত রহমান</h4>
-                            <p>ওয়েব ডেভেলপার, টেকসফট</p>
+                            <h4>Arafat Rahman</h4>
+                            <p>Web Developer, TechSoft</p>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        "ডাটাবেজ ম্যানেজমেন্ট কোর্সটি আমার ক্যারিয়ার পরিবর্তন করেছে। শিক্ষকরা খুবই সহায়ক এবং বাস্তব জীবনের উদাহরণ দিয়ে বিষয়গুলো বুঝিয়েছেন।"
+                        "The Database Management course changed my career. The teachers were very helpful and explained concepts with real-life examples."
                     </div>
                     <div class="testimonial-author">
-                        <div class="author-avatar">স</div>
+                        <div class="author-avatar">S</div>
                         <div class="author-info">
-                            <h4>সুমাইয়া আক্তার</h4>
-                            <p>ডাটাবেজ অ্যাডমিন, ডেটা ল্যাব</p>
+                            <h4>Sumaiya Akter</h4>
+                            <p>Database Admin, Data Lab</p>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-card">
                     <div class="testimonial-content">
-                        "মোবাইল অ্যাপ ডেভেলপমেন্ট কোর্সটি সম্পন্ন করার পর আমি নিজের স্টার্টআপের জন্য একটি অ্যাপ তৈরি করেছি যা এখন প্লে স্টোরে সফলভাবে চলছে।"
+                        "After completing the Mobile App Development course, I created an app for my startup that's now running successfully on the Play Store."
                     </div>
                     <div class="testimonial-author">
-                        <div class="author-avatar">ক</div>
+                        <div class="author-avatar">K</div>
                         <div class="author-info">
-                            <h4>কামরুল হাসান</h4>
-                            <p>অ্যাপ ডেভেলপার, স্টার্টআপ</p>
+                            <h4>Kamrul Hasan</h4>
+                            <p>App Developer, Startup</p>
                         </div>
                     </div>
                 </div>
@@ -426,10 +913,10 @@
     <!-- CTA Section -->
     <section class="cta" id="enroll">
         <div class="container">
-            <h2>আজই এনরোল করুন</h2>
-            <p>আপনার ভবিষ্যৎ ক্যারিয়ার গঠনের যাত্রা শুরু করুন। আমাদের পরবর্তী ব্যাচ শুরু হচ্ছে আগামী ১০ই তারিখ</p>
+            <h2>Enroll Today</h2>
+            <p>Start building your future career. Our next batch begins on the 10th of next month</p>
             <a href="online-form-fillup.html" class="btn">
-                <i class="fas fa-file-alt"></i> অনলাইন ফর্ম পূরণ করুন
+                <i class="fas fa-file-alt"></i> Fill Online Form
             </a>
         </div>
     </section>
@@ -439,8 +926,8 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-column">
-                    <h3>ডিজিটাল লার্নিং</h3>
-                    <p>আমাদের লক্ষ্য দক্ষ মানবসম্পদ গড়ে তোলা যারা ডিজিটাল দেশ গঠনে অবদান রাখবে।</p>
+                    <h3>Digital Learning</h3>
+                    <p>Our mission is to build skilled human resources who will contribute to building a digital nation.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -449,28 +936,28 @@
                     </div>
                 </div>
                 <div class="footer-column">
-                    <h3>কুইক লিংক</h3>
+                    <h3>Quick Links</h3>
                     <ul class="footer-links">
-                        <li><a href="#home"><i class="fas fa-chevron-right"></i> হোম</a></li>
-                        <li><a href="#courses"><i class="fas fa-chevron-right"></i> কোর্সসমূহ</a></li>
-                        <li><a href="#features"><i class="fas fa-chevron-right"></i> সুবিধাসমূহ</a></li>
-                        <li><a href="#about"><i class="fas fa-chevron-right"></i> আমাদের সম্পর্কে</a></li>
-                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> যোগাযোগ</a></li>
-                        <li><a href="online-form-fillup.html"><i class="fas fa-chevron-right"></i> অনলাইন ফর্ম</a></li>
+                        <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="#courses"><i class="fas fa-chevron-right"></i> Courses</a></li>
+                        <li><a href="#gallery"><i class="fas fa-chevron-right"></i> Gallery</a></li>
+                        <li><a href="#work"><i class="fas fa-chevron-right"></i> Student Work</a></li>
+                        <li><a href="#about"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-column">
-                    <h3>যোগাযোগ করুন</h3>
+                    <h3>Contact Us</h3>
                     <div class="contact-info">
-                        <p><i class="fas fa-map-marker-alt"></i> 📍 সাপটিবাড়ি, ময়নাগুড়ি, জলপাইগুড়ি</p>
-                        <p><i class="fas fa-phone"></i> 📞 9474827290 / 9832458842</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Sapthibari, Moynaguri, Jalpaiguri</p>
+                        <p><i class="fas fa-phone"></i> 9474827290 / 9832458842</p>
                         <p><i class="fas fa-envelope"></i> imclickworld@gmail.com</p>
-                        <p><i class="fas fa-clock"></i> শনিবার ও রবিবার: সকাল ১০:০০ থেকে রাত ৮টা</p>
+                        <p><i class="fas fa-clock"></i> Saturday & Sunday: 10:00 AM - 8:00 PM</p>
                     </div>
                 </div>
             </div>
             <div class="copyright">
-                &copy; ২০২৫ ক্লিক ওয়ার্ল্ড কম্পিউটার এডুকেশন সেন্টার। সকল স্বত্ব সংরক্ষিত।
+                &copy; 2025 Click World Computer Education Center. All Rights Reserved.
             </div>
         </div>
     </footer>
@@ -505,7 +992,7 @@
 
         // Animation on scroll
         const animateOnScroll = () => {
-            const elements = document.querySelectorAll('.feature-card, .course-card, .testimonial-card');
+            const elements = document.querySelectorAll('.feature-card, .course-card, .testimonial-card, .gallery-item');
             
             elements.forEach(element => {
                 const elementPosition = element.getBoundingClientRect().top;
@@ -519,7 +1006,7 @@
         };
 
         // Set initial state for animated elements
-        document.querySelectorAll('.feature-card, .course-card, .testimonial-card').forEach(el => {
+        document.querySelectorAll('.feature-card, .course-card, .testimonial-card, .gallery-item').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
