@@ -1,97 +1,233 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="bn">
 <head>
-    <!-- মেইন পেজের header সেকশনে যোগ করুন -->
-<li>
-    <a href="admission-data-access.html" class="btn" style="padding: 8px 15px; font-size: 0.9rem;">
-        <i class="fas fa-lock"></i> এডমিন লগইন
-    </a>
-</li>
-    <script src="https://apis.google.com/js/api.js"></script>
-    <script>
-        function loadGAPI() {
-            gapi.load('client:auth2', initClient);
-        }
-
-        function initClient() {
-            gapi.client.init({
-                apiKey: 'YOUR_API_KEY',
-                clientId: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
-                discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
-                scope: 'https://www.googleapis.com/auth/drive.file'
-            });
-        }
-    </script>
-</head>
-<body>
-       <!DOCTYPE html>
-<html lang="bn">
-<head>
-    <script src="https://apis.google.com/js/api.js"></script>
-    <script>
-        function loadGAPI() {
-            gapi.load('client:auth2', initClient);
-        }
-
-        function initClient() {
-            gapi.client.init({
-                apiKey: 'YOUR_API_KEY',
-                clientId: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
-                discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
-                scope: 'https://www.googleapis.com/auth/drive.file'
-            });
-        }
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ক্লিক ওয়ার্ল্ড কম্পিউটার এডুকেশন সেন্টার</title>
+    
+    <!-- Google API -->
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script>
+        function loadGAPI() {
+            gapi.load('client:auth2', initClient);
+        }
+
+        function initClient() {
+            gapi.client.init({
+                apiKey: 'YOUR_ACTUAL_API_KEY',
+                clientId: 'YOUR_ACTUAL_CLIENT_ID.apps.googleusercontent.com',
+                discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"],
+                scope: 'https://www.googleapis.com/auth/drive.file'
+            }).then(function() {
+                console.log("Google API initialized successfully");
+            }, function(error) {
+                console.error("Error initializing Google API", error);
+            });
+        }
+        
+        // Load the API when the page loads
+        window.addEventListener('load', loadGAPI);
+    </script>
+    
+    <!-- Stylesheets -->
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* আপনার সমস্ত CSS স্টাইল এখানে রাখুন */
-        /* ... পূর্বের সমস্ত CSS কোড ... */
+        :root {
+            --primary: #2563eb;
+            --secondary: #0ea5e9;
+            --accent: #8b5cf6;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --success: #10b981;
+        }
         
-        /* নতুন স্টাইল যোগ করুন */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            padding-top: 80px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo img {
+            height: 50px;
+            margin-right: 10px;
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+        
+        .logo-text span {
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-links li {
+            margin-left: 20px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+        }
+        
+        .btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(37, 99, 235, 0.4);
+        }
+        
+        .btn i {
+            margin-right: 5px;
+        }
+        
+        /* Fee Register Button */
         .fee-register-btn {
             position: fixed;
             top: 120px;
             right: 20px;
             z-index: 999;
-            display:inline-block;
-            background-color:#2563eb;
-            color:#fff;
-            padding:10px 20px;
-            border-radius:6px;
-            font-size:16px;
-            text-decoration:none;
-            font-weight:bold;
-            box-shadow:0 4px 8px rgba(0,0,0,0.2);
+            background-color: var(--primary);
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
         }
         
         .fee-register-btn:hover {
-            background-color:#1d4ed8;
+            background-color: #1d4ed8;
             transform: translateY(-2px);
-            box-shadow:0 6px 12px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
         }
         
-        @media (max-width: 768px) {
+        .fee-register-btn i {
+            margin-right: 5px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .navbar {
+                flex-direction: column;
+                padding: 10px 0;
+            }
+            
+            .nav-links {
+                margin-top: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 8px 12px;
+            }
+            
             .fee-register-btn {
                 top: 100px;
                 right: 10px;
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 120px;
+            }
+            
+            .nav-links li {
+                margin-left: 10px;
+            }
+            
+            .btn {
                 padding: 8px 15px;
-                font-size: 14px;
+                font-size: 0.9rem;
             }
         }
     </style>
 </head>
 <body>
     <!-- Header -->
-    <header>
+    <header id="main-header">
         <div class="container">
             <nav class="navbar">
                 <div class="logo">
-                    <img src="clickworld-logo.png" alt="Click World Logo" style="height: 50px; margin-right: 10px;">
+                    <img src="clickworld-logo.png" alt="Click World Logo">
                     <div class="logo-text">ডিজিটাল <span>লার্নিং</span></div>
                 </div>
                 <ul class="nav-links">
@@ -100,6 +236,11 @@
                     <li><a href="#features">সুবিধা</a></li>
                     <li><a href="#about">আমাদের সম্পর্কে</a></li>
                     <li><a href="#contact">যোগাযোগ</a></li>
+                    <li>
+                        <a href="admission-data-access.html" class="btn">
+                            <i class="fas fa-lock"></i> এডমিন লগইন
+                        </a>
+                    </li>
                 </ul>
                 <a href="#enroll" class="btn">রেজিস্ট্রেশন করুন</a>
             </nav>
@@ -108,44 +249,54 @@
 
     <!-- Student Fee Register Button -->
     <a href="student-fee-register.html" target="_blank" class="fee-register-btn">
-        📄 Open Student Fee Register
+        <i class="fas fa-file-invoice-dollar"></i> ফি রেজিস্টার
     </a>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <!-- ... বাকি সমস্ত HTML কন্টেন্ট ... -->
-    </section>
-
-    <!-- ... বাকি সমস্ত HTML সেকশন ... -->
+    <!-- Main Content Sections -->
+    <main>
+        <!-- Your content sections here -->
+        <!-- Hero, Courses, Features, etc. -->
+    </main>
 
     <script>
-        // আপনার সমস্ত JavaScript কোড এখানে রাখুন
-        // ... পূর্বের সমস্ত JavaScript কোড ...
+        // Enhanced JavaScript with better error handling
+        document.addEventListener('DOMContentLoaded', function() {
+            // Header scroll effect
+            const header = document.getElementById('main-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+                    header.style.background = 'rgba(255, 255, 255, 0.98)';
+                } else {
+                    header.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.1)';
+                    header.style.background = 'rgba(255, 255, 255, 0.95)';
+                }
+            });
+            
+            // Smooth scrolling for navigation links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Initialize Google API
+            try {
+                loadGAPI();
+            } catch (error) {
+                console.error("Failed to load Google API:", error);
+            }
+        });
     </script>
 </body>
 </html>
-    <header>
-        <div class="container">
-            <nav class="navbar">
-                <div class="logo">
-                    <img src="clickworld-logo.png" alt="Click World Logo" style="height: 50px; margin-right: 10px;">
-                    <div class="logo-text">ডিজিটাল <span>লার্নিং</span></div>
-                </div>
-                <!-- বাকি নেভিগেশন মেনু অপরিবর্তিত -->
-            </nav>
-        </div>
-    </header>
-
-    <!-- সিটিএ সেকশনে পরিবর্তন -->
-    <section class="cta" id="enroll">
-        <div class="container">
-            <h2>আজই এনরোল করুন</h2>
-            <p>আপনার ভবিষ্যৎ ক্যারিয়ার গঠনের যাত্রা শুরু করুন। আমাদের পরবর্তী ব্যাচ শুরু হচ্ছে আগামী ১০ই তারিখ</p>
-            <button onclick="window.open('admission-form.html','_blank','width=900,height=800')" class="btn">
-                এখনই রেজিস্ট্রেশন করুন
-            </button>
-        </div>
-    </section>
 
     <!-- বাকি সবকিছু অপরিবর্তিত রাখুন -->
 </body>
