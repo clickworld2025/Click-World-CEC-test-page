@@ -342,6 +342,17 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .badge.active {
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
         }
         
         /* Table Container */
@@ -357,7 +368,6 @@
         table {
             width: 100%;
             border-collapse: collapse;
-            min-width: 1200px;
         }
         
         th {
@@ -411,6 +421,7 @@
             border-radius: 6px;
             text-align: center;
             font-weight: 500;
+            min-width: 80px;
         }
         
         .month-cell:hover {
@@ -499,6 +510,143 @@
             font-size: 0.9rem;
         }
         
+        /* Student Detail Modal */
+        .student-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .student-modal-content {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .student-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .student-modal-header h2 {
+            color: var(--primary);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+        
+        .student-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        
+        .info-item {
+            padding: 15px;
+            background: rgba(243, 246, 255, 0.3);
+            border-radius: 8px;
+        }
+        
+        .info-item h4 {
+            color: var(--text-secondary);
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+        
+        .info-item p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        .fee-history {
+            margin-top: 20px;
+        }
+        
+        .fee-history h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+        }
+        
+        .fee-history-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .fee-history-table th {
+            background: var(--primary);
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .fee-history-table td {
+            padding: 10px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .fee-history-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .fee-summary {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .fee-summary-card {
+            flex: 1;
+            min-width: 200px;
+            background: var(--card);
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .fee-summary-card h4 {
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+        
+        .fee-summary-card .amount {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .paid-amount {
+            color: var(--success);
+        }
+        
+        .due-amount {
+            color: var(--danger);
+        }
+        
         /* Responsive */
         @media (max-width: 900px) {
             table {
@@ -539,6 +687,10 @@
             
             .login-container {
                 padding: 25px;
+            }
+            
+            .fee-summary {
+                flex-direction: column;
             }
         }
         
@@ -617,6 +769,25 @@
         .modal-btn.delete {
             background: var(--danger);
             color: white;
+        }
+        
+        /* Clickable student name */
+        .student-name-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .student-name-link:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+        
+        /* Visual separator for table */
+        .student-info-separator {
+            border-right: 2px solid var(--primary);
         }
     </style>
 </head>
@@ -757,6 +928,17 @@
                         </div>
                     </div>
                     
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Date of Birth</label>
+                            <input type="text" id="inpDOB" placeholder="DD/MM/YYYY">
+                        </div>
+                        <div class="form-group">
+                            <label>Admission Date</label>
+                            <input type="text" id="inpAdmissionDate" placeholder="DD/MM/YYYY">
+                        </div>
+                    </div>
+                    
                     <div class="form-actions">
                         <button type="submit" class="btn-app">
                             <i class="fas fa-save"></i> Save
@@ -780,7 +962,7 @@
                             <th>Mobile</th>
                             <th>Course</th>
                             <th>Admission Date</th>
-                            <th>Jan</th>
+                            <th class="student-info-separator">Jan</th>
                             <th>Feb</th>
                             <th>Mar</th>
                             <th>Apr</th>
@@ -821,6 +1003,82 @@
             </div>
         </div>
     </div>
+    
+    <!-- Student Detail Modal -->
+    <div class="student-modal" id="studentModal">
+        <div class="student-modal-content">
+            <div class="student-modal-header">
+                <h2 id="studentModalTitle">Student Fee Details</h2>
+                <button class="close-modal" id="closeStudentModal">&times;</button>
+            </div>
+            
+            <div class="student-info-grid">
+                <div class="info-item">
+                    <h4>Student Name</h4>
+                    <p id="detailName">-</p>
+                </div>
+                <div class="info-item">
+                    <h4>Admission Number</h4>
+                    <p id="detailAdmission">-</p>
+                </div>
+                <div class="info-item">
+                    <h4>Father's Name</h4>
+                    <p id="detailFather">-</p>
+                </div>
+                <div class="info-item">
+                    <h4>Date of Birth</h4>
+                    <p id="detailDOB">-</p>
+                </div>
+                <div class="info-item">
+                    <h4>Mobile</h4>
+                    <p id="detailMobile">-</p>
+                </div>
+                <div class="info-item">
+                    <h4>Course</h4>
+                    <p id="detailCourse">-</p>
+                </div>
+                <div class="info-item">
+                    <h4>Admission Date</h4>
+                    <p id="detailAdmissionDate">-</p>
+                </div>
+                <div class="info-item">
+                    <h4>Monthly Fee</h4>
+                    <p id="detailFee">-</p>
+                </div>
+            </div>
+            
+            <div class="fee-history">
+                <h3>Fee Payment History</h3>
+                <table class="fee-history-table">
+                    <thead>
+                        <tr>
+                            <th>Month</th>
+                            <th>Status</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="feeHistoryBody">
+                        <!-- Fee history will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="fee-summary">
+                <div class="fee-summary-card">
+                    <h4>Total Fees</h4>
+                    <div class="amount" id="detailTotalFees">₹0</div>
+                </div>
+                <div class="fee-summary-card">
+                    <h4>Total Paid</h4>
+                    <div class="amount paid-amount" id="detailTotalPaid">₹0</div>
+                </div>
+                <div class="fee-summary-card">
+                    <h4>Total Due</h4>
+                    <div class="amount due-amount" id="detailTotalDue">₹0</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Admin credentials
@@ -852,6 +1110,7 @@
         // Global variables
         let currentEditId = null;
         let studentToDelete = null;
+        let currentStatusFilter = null;
 
         // Initialize the application
         document.addEventListener('DOMContentLoaded', function() {
@@ -875,6 +1134,12 @@
             // Modal event listeners
             document.getElementById('cancelDelete').addEventListener('click', closeModal);
             document.getElementById('confirmDelete').addEventListener('click', deleteConfirmed);
+            document.getElementById('closeStudentModal').addEventListener('click', closeStudentModal);
+            
+            // Status filter badges
+            document.getElementById('paidBadge').addEventListener('click', () => toggleStatusFilter('paid'));
+            document.getElementById('unpaidBadge').addEventListener('click', () => toggleStatusFilter('unpaid'));
+            document.getElementById('partialBadge').addEventListener('click', () => toggleStatusFilter('partial'));
         });
 
         // Login function
@@ -915,8 +1180,6 @@
             tbody.innerHTML = '';
             
             students.forEach((student, index) => {
-                const tr = document.createElement('tr');
-                
                 // Calculate paid and due
                 const paid = calculatePaid(student);
                 const due = calculateDue(student);
@@ -932,21 +1195,34 @@
                     statusText = 'Partial';
                 }
                 
+                // Apply status filter if set
+                if (currentStatusFilter && status !== currentStatusFilter) {
+                    return;
+                }
+                
                 // Create row HTML
+                const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td>${index + 1}</td>
                     <td>${student.admissionNo}</td>
-                    <td>${student.name}</td>
+                    <td><span class="student-name-link" onclick="viewStudentDetails(${student.id})">${student.name}</span></td>
                     <td>${student.father}</td>
                     <td>${student.dob}</td>
                     <td>${student.mobile}</td>
                     <td>${student.course}</td>
                     <td>${student.admissionDate}</td>
-                    ${months.map(month => `
-                        <td class="month-cell ${student.months[month]}-cell" data-id="${student.id}" data-month="${month}">
-                            ${monthNames[month]}: ${getStatusText(student.months[month])}
-                        </td>
-                    `).join('')}
+                    <td class="month-cell ${student.months.jan}-cell" data-id="${student.id}" data-month="jan">${monthNames.jan}: ${getStatusText(student.months.jan)}</td>
+                    <td class="month-cell ${student.months.feb}-cell" data-id="${student.id}" data-month="feb">${monthNames.feb}: ${getStatusText(student.months.feb)}</td>
+                    <td class="month-cell ${student.months.mar}-cell" data-id="${student.id}" data-month="mar">${monthNames.mar}: ${getStatusText(student.months.mar)}</td>
+                    <td class="month-cell ${student.months.apr}-cell" data-id="${student.id}" data-month="apr">${monthNames.apr}: ${getStatusText(student.months.apr)}</td>
+                    <td class="month-cell ${student.months.may}-cell" data-id="${student.id}" data-month="may">${monthNames.may}: ${getStatusText(student.months.may)}</td>
+                    <td class="month-cell ${student.months.jun}-cell" data-id="${student.id}" data-month="jun">${monthNames.jun}: ${getStatusText(student.months.jun)}</td>
+                    <td class="month-cell ${student.months.jul}-cell" data-id="${student.id}" data-month="jul">${monthNames.jul}: ${getStatusText(student.months.jul)}</td>
+                    <td class="month-cell ${student.months.aug}-cell" data-id="${student.id}" data-month="aug">${monthNames.aug}: ${getStatusText(student.months.aug)}</td>
+                    <td class="month-cell ${student.months.sep}-cell" data-id="${student.id}" data-month="sep">${monthNames.sep}: ${getStatusText(student.months.sep)}</td>
+                    <td class="month-cell ${student.months.oct}-cell" data-id="${student.id}" data-month="oct">${monthNames.oct}: ${getStatusText(student.months.oct)}</td>
+                    <td class="month-cell ${student.months.nov}-cell" data-id="${student.id}" data-month="nov">${monthNames.nov}: ${getStatusText(student.months.nov)}</td>
+                    <td class="month-cell ${student.months.dec}-cell" data-id="${student.id}" data-month="dec">${monthNames.dec}: ${getStatusText(student.months.dec)}</td>
                     <td>₹${paid}</td>
                     <td>₹${due}</td>
                     <td><span class="status-badge status-${status}">${statusText}</span></td>
@@ -1037,6 +1313,26 @@
             document.getElementById('partialBadge').innerHTML = `<i class="fas fa-adjust"></i> Partial: ${partialCount}`;
         }
 
+        // Toggle status filter
+        function toggleStatusFilter(status) {
+            if (currentStatusFilter === status) {
+                currentStatusFilter = null;
+            } else {
+                currentStatusFilter = status;
+            }
+            
+            // Update badge active state
+            document.querySelectorAll('.badge').forEach(badge => {
+                badge.classList.remove('active');
+            });
+            
+            if (currentStatusFilter) {
+                document.getElementById(`${status}Badge`).classList.add('active');
+            }
+            
+            renderTable();
+        }
+
         // Form functions
         function openAddForm() {
             document.getElementById('formPanel').classList.add('active');
@@ -1060,6 +1356,8 @@
             document.getElementById('inpAdmission').value = student.admissionNo;
             document.getElementById('inpCourse').value = student.course;
             document.getElementById('inpFee').value = student.fee;
+            document.getElementById('inpDOB').value = student.dob;
+            document.getElementById('inpAdmissionDate').value = student.admissionDate;
             
             document.getElementById('formTitle').textContent = 'Edit Student Information';
             document.getElementById('formPanel').classList.add('active');
@@ -1075,6 +1373,8 @@
             const admissionNo = document.getElementById('inpAdmission').value;
             const course = document.getElementById('inpCourse').value;
             const fee = parseInt(document.getElementById('inpFee').value) || 300;
+            const dob = document.getElementById('inpDOB').value;
+            const admissionDate = document.getElementById('inpAdmissionDate').value;
             
             if (currentEditId !== null) {
                 // Update existing student
@@ -1086,6 +1386,8 @@
                     students[index].admissionNo = admissionNo;
                     students[index].course = course;
                     students[index].fee = fee;
+                    students[index].dob = dob;
+                    students[index].admissionDate = admissionDate;
                 }
             } else {
                 // Create new student
@@ -1095,9 +1397,9 @@
                     name,
                     father,
                     mobile,
-                    dob: '',
+                    dob: dob || '',
                     course,
-                    admissionDate: new Date().toLocaleDateString('en-GB'),
+                    admissionDate: admissionDate || new Date().toLocaleDateString('en-GB'),
                     fee,
                     months: {
                         jan: 'unpaid', feb: 'unpaid', mar: 'unpaid', apr: 'unpaid', 
@@ -1134,6 +1436,56 @@
                 updateDashboard();
                 closeModal();
             }
+        }
+
+        // Close student modal
+        function closeStudentModal() {
+            document.getElementById('studentModal').style.display = 'none';
+        }
+
+        // View student details
+        function viewStudentDetails(studentId) {
+            const student = students.find(s => s.id == studentId);
+            if (!student) return;
+            
+            // Set student information
+            document.getElementById('detailName').textContent = student.name;
+            document.getElementById('detailAdmission').textContent = student.admissionNo;
+            document.getElementById('detailFather').textContent = student.father;
+            document.getElementById('detailDOB').textContent = student.dob;
+            document.getElementById('detailMobile').textContent = student.mobile;
+            document.getElementById('detailCourse').textContent = student.course;
+            document.getElementById('detailAdmissionDate').textContent = student.admissionDate;
+            document.getElementById('detailFee').textContent = `₹${student.fee}/month`;
+            
+            // Calculate fees
+            const paidMonths = Object.values(student.months).filter(s => s === 'paid').length;
+            const unpaidMonths = Object.values(student.months).filter(s => s === 'unpaid').length;
+            const totalMonths = months.length;
+            const totalFees = totalMonths * student.fee;
+            const totalPaid = paidMonths * student.fee;
+            const totalDue = unpaidMonths * student.fee;
+            
+            document.getElementById('detailTotalFees').textContent = `₹${totalFees}`;
+            document.getElementById('detailTotalPaid').textContent = `₹${totalPaid}`;
+            document.getElementById('detailTotalDue').textContent = `₹${totalDue}`;
+            
+            // Render fee history
+            const feeHistoryBody = document.getElementById('feeHistoryBody');
+            feeHistoryBody.innerHTML = '';
+            
+            months.forEach(month => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${monthNames[month]}</td>
+                    <td><span class="status-badge status-${student.months[month]}">${getStatusText(student.months[month])}</span></td>
+                    <td>${student.months[month] === 'paid' ? `₹${student.fee}` : '₹0'}</td>
+                `;
+                feeHistoryBody.appendChild(row);
+            });
+            
+            // Show the modal
+            document.getElementById('studentModal').style.display = 'flex';
         }
 
         // Filter students
